@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Space Image Viewer</string>
+    <string name="action_settings">Settings</string>
+    <string name="select_text">Select An Image Type</string>
+    <string name="detail_view">Details:</string>
+    <string name="Description">Image View</string>
+    <color name="Purple">#7F00FF</color>
+    <color name="Grey">#D8D8D8</color>
+    <color name="Aqua">#99FFFF</color>
+   
+
+</resources>
