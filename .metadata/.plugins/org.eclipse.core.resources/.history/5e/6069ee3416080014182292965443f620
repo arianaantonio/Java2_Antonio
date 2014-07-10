@@ -10,23 +10,29 @@
  */
 package com.arianaantonio.spaceimageviewer;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 
 import JSON.FileManager;
 import JSON.ServiceClass;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Messenger;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.arianaantonio.networkconnection.NetworkConnect;
+import com.loopj.android.image.SmartImageView;
 //import com.arianaantonio.networkjar.networkConnection;
 
 
@@ -36,8 +42,8 @@ public class MainActivity extends Activity {
 	
 	Context mContext;
 	public static ArrayList<String> arrayForGridView = new ArrayList<String>();
-	private static FileManager fileManager = FileManager.getInstance();
-	final MyHandler handler = new MyHandler(this);
+	buildJSON imageJSON = new buildJSON();
+	
 	
 
 	@Override
@@ -57,15 +63,13 @@ public class MainActivity extends Activity {
 			Toast.makeText(mContext, "You are NOT connected", Toast.LENGTH_LONG).show();
 		}
 		
-		//empty listview so it doesn't append data
-		arrayForGridView.removeAll(arrayForGridView);
+				//empty listview so it doesn't append data
+				arrayForGridView.removeAll(arrayForGridView);
 			
-		final MyHandler handler = new MyHandler(this);
 		
-		getData();
 				
 				//try {
-					/*
+					
 					//creating listview
 					ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, arrayForGridView);
 					ListView listView = (ListView) findViewById(R.id.listView1);
@@ -119,39 +123,11 @@ public class MainActivity extends Activity {
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
-				
-				}*/
+				*/
+				}
 				
 		
 			} 
-	private static class MyHandler extends Handler {
-		
-		private final WeakReference<MainActivity> myActivity;
-		
-		public MyHandler(MainActivity activity) {
-			myActivity = new WeakReference<MainActivity>(activity);
-		}
-		
-		public void messageHandler(Message message) {
-			MainActivity activity = myActivity.get();
-			if (activity !=null) {
-				
-				Object objectReturned = message.obj;
-				if (message.arg1 == RESULT_OK && objectReturned !=null) {
-					Log.i("Main Activity", "Message handler");
-					activity.displayData();
-				}
-			}
-		}
-	}
-	
-	public void getData() {
-		Messenger messenger = new Messenger(handler);
-		
-		Intent getIntent = new Intent(this, ServiceClass.class);
-		getIntent.putExtra("messenger", messenger);
-		startService(getIntent);
-	}
 			 
 
 			

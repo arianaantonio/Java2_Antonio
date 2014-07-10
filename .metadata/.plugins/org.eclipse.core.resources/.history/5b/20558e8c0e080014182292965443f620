@@ -3,16 +3,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="@color/Purple" >
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/Aqua"
-        android:gravity="center"
-        android:text="@string/textview_text" />
-
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"

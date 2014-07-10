@@ -8,10 +8,8 @@
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/Aqua"
-        android:gravity="center"
-        android:text="@string/textview_text" />
+        android:text="@string/textview_text"
+        android:background="@color/Aqua" />
 
     <ListView
         android:id="@+id/listView1"
