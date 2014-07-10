@@ -22,8 +22,7 @@ import android.util.Log;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class FileManager. Creates the writeStringFile and readStringFile to
- * save api data locally so it can be displayed in the app.
+ * The Class FileManager.
  */
 public class FileManager {
 

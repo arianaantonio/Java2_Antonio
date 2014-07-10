@@ -1,13 +1,3 @@
-/*
- * project SpaceImageViewer
- * 
- * packager JSON
- * 
- * @author Ariana Antonio
- * 
- * date Jul 10, 2014
- * 
- */
 package JSON;
 
 //Ariana Antonio
@@ -34,10 +24,6 @@ import android.util.Log;
 
 
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class buildJSON.
- */
 public class buildJSON {
 
 	static String TAG = "JSON DATA - JSON BUILDER";
@@ -45,13 +31,6 @@ public class buildJSON {
 	public static String _apiURL;
 	//= "http://www.astrobin.com/api/v1/image/?title__icontains=andromeda&api_key=e5ca219df4572fd4f187f3e6c4192e24af7e78f8&api_secret=5d4bf7b7097eed09a878af19a475fb879a36b916&format=json";
 	
-	/**
-	 * Builds json images.
-	 *
-	 * @param context the context
-	 * @param typeID the type id
-	 * @return the JSON array
-	 */
 	public JSONArray buildsJSONImages(Context context, String typeID) {
 		//initial object
 		//JSONObject imagesObject = new JSONObject();

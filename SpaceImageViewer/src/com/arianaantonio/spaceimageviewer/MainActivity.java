@@ -1,12 +1,14 @@
+/*
+ * project SpaceImageViewer
+ * 
+ * packager com.arianaantonio.spaceimageviewer
+ * 
+ * @author Ariana Antonio
+ * 
+ * date Jul 10, 2014
+ * 
+ */
 package com.arianaantonio.spaceimageviewer;
-
-//Ariana Antonio
-//Java 1, Week 1, Full Sail University, MDVBS
-//06/10/2014
-
-
-
-//import imageType.ImageAdapter;
 
 import java.util.ArrayList;
 

@@ -1,13 +1,3 @@
-/*
- * project SpaceImageViewer
- * 
- * packager JSON
- * 
- * @author Ariana Antonio
- * 
- * date Jul 10, 2014
- * 
- */
 
 package JSON;
 
@@ -20,27 +10,14 @@ import java.io.IOException;
 import android.content.Context;
 import android.util.Log;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class FileManager. Creates the writeStringFile and readStringFile to
- * save api data locally so it can be displayed in the app.
- */
 public class FileManager {
 
 	private static FileManager managerInstance;
 	
-	/**
-	 * Instantiates a new file manager.
-	 */
 	private FileManager() {
 		
 	}
 	
-	/**
-	 * Gets the single instance of FileManager.
-	 *
-	 * @return single instance of FileManager
-	 */
 	public static FileManager getInstance() {
 		if (managerInstance == null) {
 			managerInstance = new FileManager();
@@ -48,14 +25,6 @@ public class FileManager {
 		return managerInstance;
 	}
 	
-	/**
-	 * Write string file.
-	 *
-	 * @param context the context
-	 * @param filename the filename
-	 * @param content the content
-	 * @return the boolean
-	 */
 	public Boolean writeStringFile(Context context, String filename, String content) {
 		Boolean result = false;
 		FileOutputStream fos = null;
@@ -75,13 +44,6 @@ public class FileManager {
 		
 	}
 	
-	/**
-	 * Read string file.
-	 *
-	 * @param context the context
-	 * @param filename the filename
-	 * @return the string
-	 */
 	public String readStringFile(Context context, String filename) {
 		String content = "";
 		
