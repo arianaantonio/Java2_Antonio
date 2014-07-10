@@ -100,13 +100,13 @@ public class FileManager {
 				contentBuffer.append(content);
 			}
 		} catch (IOException e) {
-			Log.e("Error in read file", e.getMessage().toString());
+			Log.e("Error in read file", e.toString());
 			e.printStackTrace();
 		} finally {
 			try {
 				fis.close();
 			} catch (IOException e) {
-				Log.e("Error closing file", e.getMessage().toString());
+				Log.e("Error closing file", e.toString());
 				e.printStackTrace();
 			}
 			
