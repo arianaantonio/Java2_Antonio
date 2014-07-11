@@ -189,10 +189,10 @@ public class MainActivity extends Activity {
 			}
 			arrayForGridView.add(displayText);
 			
-			//SimpleAdapter adapter = new SimpleAdapter(this, arrayForGridView, R.layout.image_list,
-					//new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
+			SimpleAdapter adapter = new SimpleAdapter(this, arrayForGridView, R.layout.image_list,
+					new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
 			
-			//listView.setAdapter(adapter);
+			listView.setAdapter(adapter);
 			
 		}
 	}

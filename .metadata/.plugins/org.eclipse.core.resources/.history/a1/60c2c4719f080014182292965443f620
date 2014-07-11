@@ -45,7 +45,6 @@ public class MainActivity extends Activity {
 	public static ArrayList<HashMap> arrayForGridView = new ArrayList<HashMap>();
 	private static FileManager fileManager = FileManager.getInstance();
 	final MyHandler handler = new MyHandler(this);
-	ListView listView = (ListView) findViewById(R.id.listView1);
 	
 
 	@Override
@@ -68,12 +67,12 @@ public class MainActivity extends Activity {
 		//empty listview so it doesn't append data
 		arrayForGridView.removeAll(arrayForGridView);
 			
-		//final MyHandler handler = new MyHandler(this);
+		final MyHandler handler = new MyHandler(this);
 		
 		getData();
 		
-		//ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, arrayForGridView);
-		
+		ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, arrayForGridView);
+		ListView listView = (ListView) findViewById(R.id.listView1);
 				
 				//try {
 					/*
@@ -189,10 +188,10 @@ public class MainActivity extends Activity {
 			}
 			arrayForGridView.add(displayText);
 			
-			//SimpleAdapter adapter = new SimpleAdapter(this, arrayForGridView, R.layout.image_list,
-					//new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
+			SimpleAdapter adapter = new SimpleAdapter(this, arrayForGridView, R.layout.image_list,
+					new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
 			
-			//listView.setAdapter(adapter);
+			
 			
 		}
 	}

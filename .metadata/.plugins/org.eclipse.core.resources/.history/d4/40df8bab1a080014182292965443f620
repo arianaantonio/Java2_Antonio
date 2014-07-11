@@ -12,10 +12,6 @@ package com.arianaantonio.spaceimageviewer;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import JSON.FileManager;
 import JSON.ServiceClass;
@@ -28,9 +24,6 @@ import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.arianaantonio.networkconnection.NetworkConnect;
@@ -42,10 +35,9 @@ public class MainActivity extends Activity {
 	//global variables
 	
 	Context mContext;
-	public static ArrayList<HashMap> arrayForGridView = new ArrayList<HashMap>();
+	public static ArrayList<String> arrayForGridView = new ArrayList<String>();
 	private static FileManager fileManager = FileManager.getInstance();
 	final MyHandler handler = new MyHandler(this);
-	ListView listView = (ListView) findViewById(R.id.listView1);
 	
 
 	@Override
@@ -68,12 +60,9 @@ public class MainActivity extends Activity {
 		//empty listview so it doesn't append data
 		arrayForGridView.removeAll(arrayForGridView);
 			
-		//final MyHandler handler = new MyHandler(this);
+		final MyHandler handler = new MyHandler(this);
 		
 		getData();
-		
-		//ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, arrayForGridView);
-		
 				
 				//try {
 					/*
@@ -148,19 +137,9 @@ public class MainActivity extends Activity {
 			if (activity !=null) {
 				
 				Object objectReturned = message.obj;
-				String filename = objectReturned.toString();
 				if (message.arg1 == RESULT_OK && objectReturned !=null) {
 					Log.i("Main Activity", "Message handler");
-					String fileContent = fileManager.readStringFile(activity, filename);
-					JSONArray jsonArray;
-					try {
-						jsonArray = new JSONArray(fileContent);
-						activity.displayData(jsonArray);
-					} catch (JSONException e) {
-
-						e.printStackTrace();
-					}
-					
+					activity.displayData();
 				}
 			}
 		}
@@ -172,29 +151,6 @@ public class MainActivity extends Activity {
 		Intent getIntent = new Intent(this, ServiceClass.class);
 		getIntent.putExtra("messenger", messenger);
 		startService(getIntent);
-	}
-	
-	public void displayData(JSONArray jsonArray) {
-		
-		for (int i = 0; i < jsonArray.length(); i++) {
-			HashMap<String, String> displayText = new HashMap<String, String>();
-			
-			try {
-				displayText.put("title", jsonArray.getString(1));
-				displayText.put("user", jsonArray.getString(2));
-				displayText.put("imaging_cameras", jsonArray.getString(3));
-			} catch (JSONException e) {
-				Log.e("Error displaying data in listview", e.getMessage().toString());
-				e.printStackTrace();
-			}
-			arrayForGridView.add(displayText);
-			
-			//SimpleAdapter adapter = new SimpleAdapter(this, arrayForGridView, R.layout.image_list,
-					//new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
-			
-			//listView.setAdapter(adapter);
-			
-		}
 	}
 			 
 
