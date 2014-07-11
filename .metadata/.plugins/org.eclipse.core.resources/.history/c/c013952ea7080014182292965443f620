@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
 
 	public static ArrayList<HashMap> arrayForGridView = new ArrayList<HashMap>();
 	private static FileManager fileManager = FileManager.getInstance();
-	final MyHandler handler = new MyHandler(this);
+	//final MyHandler handler = new MyHandler(this);
 	
 	
 
@@ -138,7 +138,7 @@ public class MainActivity extends Activity {
 				
 		
 			} 
-	
+	/*
 	private static class MyHandler extends Handler {
 		
 		private final WeakReference<MainActivity> myActivity;
@@ -146,7 +146,7 @@ public class MainActivity extends Activity {
 		public MyHandler(MainActivity activity) {
 			myActivity = new WeakReference<MainActivity>(activity);
 		}
-		
+		/*
 		public void messageHandler(Message message) {
 			MainActivity activity = myActivity.get();
 			if (activity !=null) {
@@ -159,7 +159,7 @@ public class MainActivity extends Activity {
 					JSONArray jsonArray;
 					try {
 						jsonArray = new JSONArray(fileContent);
-						activity.displayData(jsonArray);
+						//activity.displayData(jsonArray);
 					} catch (JSONException e) {
 
 						e.printStackTrace();
@@ -167,17 +167,17 @@ public class MainActivity extends Activity {
 					
 				}
 			}
-		}
-	}
-	
+		}*/
+	//}
+	/*
 	public void getData() {
 		Messenger messenger = new Messenger(handler);
 		
 		Intent getIntent = new Intent(this, ServiceClass.class);
 		getIntent.putExtra("messenger", messenger);
 		startService(getIntent);
-	}
-	
+	}*/
+	/*
 	public void displayData(JSONArray jsonArray) {
 		
 		for (int i = 0; i < jsonArray.length(); i++) {
@@ -191,7 +191,7 @@ public class MainActivity extends Activity {
 				Log.e("Error displaying data in listview", e.getMessage().toString());
 				e.printStackTrace();
 			}
-			arrayForGridView.add(displayText);
+			//arrayForGridView.add(displayText);
 			
 			//SimpleAdapter adapter = new SimpleAdapter(this, arrayForGridView, R.layout.image_list,
 					//new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
@@ -200,7 +200,7 @@ public class MainActivity extends Activity {
 			
 		}
 	}
-			 
+		*/	 
 
 			
 			 

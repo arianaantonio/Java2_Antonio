@@ -42,18 +42,15 @@ public class MainActivity extends Activity {
 	//global variables
 	
 	Context mContext;
-
 	public static ArrayList<HashMap> arrayForGridView = new ArrayList<HashMap>();
 	private static FileManager fileManager = FileManager.getInstance();
 	final MyHandler handler = new MyHandler(this);
-	
+	ListView listView = (ListView) findViewById(R.id.listView1);
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		ListView listView = (ListView) findViewById(R.id.listView1);
 		
 		mContext = this;
 		//final buildJSON imageJSON = new buildJSON();
@@ -69,11 +66,11 @@ public class MainActivity extends Activity {
 		}
 		
 		//empty listview so it doesn't append data
-		//arrayForGridView.removeAll(arrayForGridView);
+		arrayForGridView.removeAll(arrayForGridView);
 			
 		//final MyHandler handler = new MyHandler(this);
 		
-		//getData();
+		getData();
 		
 		//ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, arrayForGridView);
 		
@@ -138,7 +135,6 @@ public class MainActivity extends Activity {
 				
 		
 			} 
-	
 	private static class MyHandler extends Handler {
 		
 		private final WeakReference<MainActivity> myActivity;

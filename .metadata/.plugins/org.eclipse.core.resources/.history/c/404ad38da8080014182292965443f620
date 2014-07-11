@@ -191,7 +191,7 @@ public class MainActivity extends Activity {
 				Log.e("Error displaying data in listview", e.getMessage().toString());
 				e.printStackTrace();
 			}
-			arrayForGridView.add(displayText);
+			//arrayForGridView.add(displayText);
 			
 			//SimpleAdapter adapter = new SimpleAdapter(this, arrayForGridView, R.layout.image_list,
 					//new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});

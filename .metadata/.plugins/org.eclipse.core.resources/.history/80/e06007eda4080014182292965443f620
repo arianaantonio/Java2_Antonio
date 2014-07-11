@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name="json.ServiceClass"></service>
+        <service android:name="JSON.ServiceClass"></service>
     </application>
 
 </manifest>
