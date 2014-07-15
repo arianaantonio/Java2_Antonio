@@ -8,7 +8,7 @@
  * date Jul 10, 2014
  * 
  */
-package JSON;
+package json;
 
 //Ariana Antonio
 //Java 1, Week 1, Full Sail University, MDVBS

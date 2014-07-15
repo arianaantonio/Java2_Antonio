@@ -14,11 +14,13 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import json.FileManager;
+import json.ServiceClass;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
-import JSON.FileManager;
-import JSON.ServiceClass;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +30,6 @@ import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -42,10 +43,14 @@ public class MainActivity extends Activity {
 	//global variables
 	
 	Context mContext;
+	FileManager mFile;
+	String mFileName = "ImageFile.txt";
+	ListView listView;
 
-	public static ArrayList<HashMap> arrayForGridView = new ArrayList<HashMap>();
+	//ArrayList<HashMap> arrayForGridView = new ArrayList<HashMap>();
 	private static FileManager fileManager = FileManager.getInstance();
 	final MyHandler handler = new MyHandler(this);
+	ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
 	
 	
 
@@ -53,9 +58,15 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		ListView listView = (ListView) findViewById(R.id.listView1);
-		
 		mContext = this;
+		mFile = FileManager.getInstance();
+		String storeString = "Test String";
+		mFile.writeStringFile(mContext, mFileName, storeString);
+		
+		
+		listView = (ListView) findViewById(R.id.listView1);
+		
+		
 		//final buildJSON imageJSON = new buildJSON();
 		setContentView(R.layout.activity_main);
 		
@@ -71,9 +82,9 @@ public class MainActivity extends Activity {
 		//empty listview so it doesn't append data
 		//arrayForGridView.removeAll(arrayForGridView);
 			
-		//final MyHandler handler = new MyHandler(this);
+		final MyHandler handler = new MyHandler(this);
 		
-		//getData();
+		getData(handler);
 		
 		//ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, arrayForGridView);
 		
@@ -146,22 +157,34 @@ public class MainActivity extends Activity {
 		public MyHandler(MainActivity activity) {
 			myActivity = new WeakReference<MainActivity>(activity);
 		}
-		
-		public void messageHandler(Message message) {
+		@Override
+		public void handleMessage(Message message) {
 			MainActivity activity = myActivity.get();
 			if (activity !=null) {
 				
 				Object objectReturned = message.obj;
 				String filename = objectReturned.toString();
+				Log.i("Filename", filename);
+				
 				if (message.arg1 == RESULT_OK && objectReturned !=null) {
+					
 					Log.i("Main Activity", "Message handler");
 					String fileContent = fileManager.readStringFile(activity, filename);
-					JSONArray jsonArray;
+					Log.i("Main Activity", "File content: " +fileContent);
+					
+					
+					Log.i("Main Activity", "working");
 					try {
-						jsonArray = new JSONArray(fileContent);
-						activity.displayData(jsonArray);
+						//Log.i("Main Activity", "Handler working here");
+						//JSONObject json = new JSONObject(fileContent.substring(fileContent.indexOf("{"), fileContent.lastIndexOf("}") + 1));
+						JSONObject json = new JSONObject(fileContent);
+						Log.i("Main Activity", "working");
+						//JSONArray jsonArray = new JSONArray(fileContent);
+						Log.i("Main Activity", "Handler working here");
+						//JSONArray imagesArray = json.getJSONArray("objects");
+						//activity.displayData(imagesArray);
 					} catch (JSONException e) {
-
+						Log.e("JSON Parser", "Error parsing data [" + e.getMessage()+"] "+fileContent);
 						e.printStackTrace();
 					}
 					
@@ -170,7 +193,7 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-	public void getData() {
+	public void getData(Handler handler) {
 		Messenger messenger = new Messenger(handler);
 		
 		Intent getIntent = new Intent(this, ServiceClass.class);
@@ -184,19 +207,26 @@ public class MainActivity extends Activity {
 			HashMap<String, String> displayText = new HashMap<String, String>();
 			
 			try {
-				displayText.put("title", jsonArray.getString(1));
-				displayText.put("user", jsonArray.getString(2));
-				displayText.put("imaging_cameras", jsonArray.getString(3));
+				String urlString = jsonArray.getJSONObject(i).getString("url_regular");
+				String title = jsonArray.getJSONObject(i).getString("title");
+				String user = jsonArray.getJSONObject(i).getString("user");
+				String camera = jsonArray.getJSONObject(i).getString("imaging_cameras");
+				
+				displayText.put("title", title);
+				displayText.put("user", user);
+				displayText.put("imaging_cameras", camera);
+				displayText.put("url", urlString);
+				
 			} catch (JSONException e) {
 				Log.e("Error displaying data in listview", e.getMessage().toString());
 				e.printStackTrace();
 			}
-			arrayForGridView.add(displayText);
+			myData.add(displayText);
 			
-			//SimpleAdapter adapter = new SimpleAdapter(this, arrayForGridView, R.layout.image_list,
-					//new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
+			SimpleAdapter adapter = new SimpleAdapter(this, myData, R.layout.image_list,
+					new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
 			
-			//listView.setAdapter(adapter);
+			listView.setAdapter(adapter);
 			
 		}
 	}

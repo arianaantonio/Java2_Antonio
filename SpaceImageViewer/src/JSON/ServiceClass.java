@@ -8,7 +8,7 @@
  * date Jul 10, 2014
  * 
  */
-package JSON;
+package json;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -58,16 +58,21 @@ public class ServiceClass extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		
-	String filename = "ImageFile";	
+	String filename = "ImageFile.txt";	
 	
 	_apiURL = "http://www.astrobin.com/api/v1/image/?title__icontains=spiral&api_key=e5ca219df4572fd4f187f3e6c4192e24af7e78f8&api_secret=5d4bf7b7097eed09a878af19a475fb879a36b916&format=json";
 	String content = getData(_apiURL);
+	Log.i("Service Class", content);
 	
 	Bundle extra = intent.getExtras();
 	Messenger messenger = (Messenger) extra.get(MESSENGER_KEY);
 	Message message = Message.obtain();
 	message.arg1 = Activity.RESULT_OK;
 	message.obj = filename;
+	Log.i("Service Class", filename);
+	
+	
+	
 	
 	try {
 		messenger.send(message);
