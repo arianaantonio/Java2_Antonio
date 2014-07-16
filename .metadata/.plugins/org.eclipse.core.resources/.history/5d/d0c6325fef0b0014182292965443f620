@@ -1,0 +1,15 @@
+/*
+ * project SpaceImageViewer
+ * 
+ * packager com.arianaantonio.spaceimageviewer
+ * 
+ * @author Ariana Antonio
+ * 
+ * date Jul 14, 2014
+ * 
+ */
+package com.arianaantonio.spaceimageviewer;
+
+public class DetailsActivity {
+
+}

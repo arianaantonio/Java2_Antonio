@@ -49,7 +49,7 @@ public class FileManager {
 	}
 	
 	/**
-	 * Write string file.
+	 * Write string file and save. Called in ServiceClass
 	 *
 	 * @param context the context
 	 * @param filename the filename
@@ -76,7 +76,7 @@ public class FileManager {
 	}
 	
 	/**
-	 * Read string file.
+	 * Read string file. Called in MainActivity
 	 *
 	 * @param context the context
 	 * @param filename the filename
