@@ -24,6 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.arianaantonio.spaceimageviewer.DetailsActivity"
+            android:label="@string/detailactivity" > </activity>
         <service android:name="json.ServiceClass"></service>
     </application>
 

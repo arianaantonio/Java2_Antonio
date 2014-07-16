@@ -22,7 +22,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,6 +32,9 @@ import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -86,6 +91,18 @@ public class MainActivity extends Activity {
 		
 		getData(handler);
 		
+		Button button = (Button) findViewById(R.id.button1);
+		button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent detailActivity = new Intent(getBaseContext(), DetailsActivity.class);
+				startActivityForResult(detailActivity, 0);
+				
+			}
+		});
+		
+	
 		//ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, arrayForGridView);
 		
 				
@@ -232,7 +249,45 @@ public class MainActivity extends Activity {
 			
 		}
 	}
-			 
+		
+	protected void onActivityResult(int requestCode, int resultCode, Intent dataPassing) {
+		Log.i("Main Activity", "Pulling passed data");
+		
+		if (resultCode == RESULT_OK && requestCode == 0) {
+			if (dataPassing.hasExtra("rating") && dataPassing.hasExtra("title")) {
+				Float rating = dataPassing.getExtras().getFloat("rating");
+				String title = dataPassing.getExtras().getString("title");
+				
+				AlertDialog.Builder ratingDialog = new AlertDialog.Builder(this);
+				
+				if (rating.toString() == "0.0") {
+					ratingDialog.setTitle(title).setMessage("You did not rate this as a favorite")
+					.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+					
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						
+						}
+					});
+				} else {
+					ratingDialog.setTitle(title).setMessage("You rated this as a favorite")
+					.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+					
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						
+						}
+					});
+				}
+				ratingDialog.create();
+				ratingDialog.show();
+				
+				
+			}
+		}
+	}
 
 			
 			 

@@ -14,17 +14,23 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 public class DetailsActivity extends Activity {
 	RatingBar ratingBar;
 	float rating;
 	Button hdButton;
+	TextView title;
+	TextView user;
+	TextView camera;
+	Uri imageUri;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,9 @@ public class DetailsActivity extends Activity {
 			public boolean onTouch(View v, MotionEvent event) {
 				rating = ratingBar.getRating();
 				//listener.setRating(rating);
+				String ratingValue = String.valueOf(rating);
+				Log.i("Favorite", ratingValue);
+				
 				return false;
 			}
 		});
@@ -52,5 +61,22 @@ public class DetailsActivity extends Activity {
 				
 			}
 		});
-	}	
+		
+	
+	}
+	
+	@Override
+	public void finish() {
+		Log.i("Detail Activity", "Activity Finished");
+		
+		title = (TextView) findViewById(R.id.title);
+		String titleString = title.getText().toString();
+		
+		Intent dataPassing = new Intent();
+		dataPassing.putExtra("title", titleString);
+		dataPassing.putExtra("rating", rating);
+		
+		setResult(RESULT_OK, dataPassing);
+		super.finish();
+	}
 }

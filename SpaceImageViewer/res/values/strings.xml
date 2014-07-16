@@ -12,6 +12,8 @@
     <string name="userString">User:</string>
     <string name="cameraString">Camera:</string>
     <string name="HDbutton">View HD Image</string>
+    <string name="detailactivity">Details Activity</string>
+    <string name="favorite">Save As Favorite</string>
    
 
 </resources>
