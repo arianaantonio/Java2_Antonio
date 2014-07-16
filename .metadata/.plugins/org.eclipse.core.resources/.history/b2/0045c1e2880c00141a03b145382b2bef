@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+View HD Image<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Space Image Viewer</string>
@@ -11,7 +11,7 @@
     <color name="Aqua">#99FFFF</color>
     <string name="userString">User:</string>
     <string name="cameraString">Camera:</string>
-    <string name="HDbutton">View HD Image</string>
+    <string name="HD_button">View HD Image</string>
    
 
 </resources>
