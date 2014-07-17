@@ -23,19 +23,25 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.loopj.android.image.SmartImageView;
+
 public class DetailsActivity extends Activity {
 	RatingBar ratingBar;
 	float rating;
 	Button hdButton;
-	TextView title;
-	TextView user;
-	TextView camera;
-	Uri imageUri;
+	TextView titleView;
+	TextView userView;
+	TextView cameraView;
+	String hdString;
+	//Uri imageUri;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.details_activity);
+		titleView = (TextView) findViewById(R.id.title);
+		userView = (TextView) findViewById(R.id.userName);
+		cameraView = (TextView) findViewById(R.id.cameraType);
 		
 		ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 		ratingBar.setOnTouchListener(new OnTouchListener() {
@@ -50,26 +56,43 @@ public class DetailsActivity extends Activity {
 				return false;
 			}
 		});
+
+		Bundle data = getIntent().getExtras();
+		
+		if(data != null){
+			Log.i("Detail Activity", "working5");
+			String user = data.getString("user");
+			String url = data.getString("url");
+			String camera = data.getString("camera");
+			String title = data.getString("title");
+			hdString = data.getString("hdImage");
+			Log.i("Detail Activity", "Inside Data");
+			final SmartImageView imageView = (SmartImageView) findViewById(R.id.my_image);
+			imageView.setImageUrl(url);
+			Log.i("Detail Activity", "Brought over: " +user+ " " +url+ " " +title+ " " +camera);
+			titleView.setText(title);
+			userView.setText(user);
+			cameraView.setText(camera);
+			
+		}
 		hdButton = (Button) findViewById(R.id.button1);
 		hdButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Uri website = Uri.parse("http://www.google.com");
+				Uri website = Uri.parse(hdString);
 				Intent websiteIntent = new Intent(Intent.ACTION_VIEW, website);
 				startActivity(websiteIntent);
 				
 			}
 		});
-		
-	
 	}
 	
 	@Override
 	public void finish() {
 		Log.i("Detail Activity", "Activity Finished");
 		
-		title = (TextView) findViewById(R.id.title);
+		TextView title = (TextView) findViewById(R.id.title);
 		String titleString = title.getText().toString();
 		
 		Intent dataPassing = new Intent();

@@ -12,6 +12,7 @@
 package json;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -90,8 +91,12 @@ public class FileManager {
 		try {
 			
 			fis = context.openFileInput(filename);
+		
 			BufferedInputStream bis = new BufferedInputStream(fis);
-			byte[] contentBytes = new byte[1024];
+			File file = context.getFileStreamPath(filename);
+			int filesize = (int) file.length();
+			//byte[] contentBytes = new byte[50000];
+			byte[] contentBytes = new byte[filesize];
 			int bytesRead = 0;
 			StringBuffer contentBuffer = new StringBuffer();
 			
