@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
 		mFile = FileManager.getInstance();
 		
 		setContentView(R.layout.activity_main);
-		//check if there's a saved instance and populate listView with it
+		
 		if (savedInstanceState != null) {
 			Log.i("Main Activity", "working in first saved");
 			myData = (ArrayList<HashMap<String, String>>) savedInstanceState.getSerializable("saved"); 
@@ -210,6 +210,9 @@ public class MainActivity extends Activity {
 					Log.i("Main Activity", "working6");
 					startActivityForResult(detailActivity, 0);
 					Log.i("Main Activity", "working7");
+					
+					
+					
 				}
 				
 			});
@@ -253,7 +256,7 @@ public class MainActivity extends Activity {
 			}
 		}
 	}
-	//saving instance state of listView
+	
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);

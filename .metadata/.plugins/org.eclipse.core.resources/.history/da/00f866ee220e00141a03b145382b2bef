@@ -6,7 +6,7 @@
     <string name="textview_text">List of images of spiral galaxies</string>
     <string name="detail_view">Details:</string>
     <string name="Description">Image View</string>
-    <color name="Purple">#C285FF</color>
+    <color name="Purple">#7F00FF</color>
     <color name="Grey">#D8D8D8</color>
     <color name="Aqua">#99FFFF</color>
     <string name="userString">User:</string>

@@ -83,7 +83,11 @@ public class ServiceClass extends IntentService {
 		e.printStackTrace();
 	}
 	
-}
+	
+	
+	
+	
+	}
 	//grab data from API URL and pass it into getResponse to handle the connection
 	public static String getData(String URL) {
 		responseStr = "";
