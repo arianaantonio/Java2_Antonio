@@ -65,7 +65,6 @@ public class MainActivity extends Activity {
 		
 		mContext = this;
 		mFile = FileManager.getInstance();
-		listView = (ListView) findViewById(R.id.listView1);
 		
 		setContentView(R.layout.activity_main);
 		//check if there's a saved instance and populate listView with it
@@ -78,7 +77,6 @@ public class MainActivity extends Activity {
 				Log.i("Main Activity", "Saved Instance");
 				SimpleAdapter adapter = new SimpleAdapter(this, myData, R.layout.advance_listview,
 						new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
-				listView = (ListView) findViewById(R.id.listView1);
 				listView.setAdapter(adapter);
 				Log.i("Main Activity", "working after my data not null");
 				
