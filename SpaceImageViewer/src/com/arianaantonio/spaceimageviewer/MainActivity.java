@@ -67,7 +67,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		mFile = FileManager.getInstance();
 		//listView = (ListView) findViewById(R.id.listView1);
 		
-		setContentView(R.layout.fragment_main);
+		//setContentView(R.layout.fragment_main);
 		/*
 		//check if there's a saved instance and populate listView with it
 		if (savedInstanceState != null) {
@@ -103,7 +103,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		final MyHandler handler = new MyHandler(this);
 		
 		getData(handler);
-	
+		setContentView(R.layout.fragment_main);
 	} 
 	
 	private static class MyHandler extends Handler {
@@ -173,15 +173,36 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 				
 				Log.i("Returned objects", title+ " " +user+" " +camera+ " " +url);
 				
-				startMainFragment(url, title, user, camera, hd);
+				
+				Bundle data = new Bundle();
+				data.putString("title", title);
+				data.putString("user", user);
+				data.putString("camera", camera);
+				data.putString("url", url);
+				data.putString("hd url", hd);
+				
+				MainFragment newFragment = new MainFragment();
+				newFragment.setArguments(data);
+				Log.i("Main Activity", "working3");
+				
+		
 				/*
+				HashMap<String, String> displayText = new HashMap<String, String>();
+				ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
+				Log.i("Main Activity", "working 2.5");
 				displayText.put("title", title);
 				displayText.put("user", user);
 				displayText.put("imaging_cameras", camera);
-				displayText.put("url", urlString);
+				displayText.put("url", url);
 				displayText.put("hdImage", hd);
-				Log.i("Main Activity", "working3");
-				*/
+				Log.i("Main Activity", "working3");*/
+				
+				//myData.add(displayText);
+				
+				//MainFragment newFragment = new MainFragment();
+				//Bundle data = new Bundle();
+				//data.putStringArrayList("list data", myData);
+				//data.put
 			} catch (JSONException e) {
 				Log.e("Error displaying data in listview", e.getMessage().toString());
 				e.printStackTrace();
@@ -287,22 +308,12 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		}
 	}*/
 
-	@Override
+	@Override 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	@Override
-	public void startMainFragment(String urlString, String titleString, String userString,
-			String cameraString, String hdString) {
 	
-		//urlString = urlString;
-		//titleString = title;
-		//userString = user;
-		//cameraString = camera;
-		//hdString = hd;
-		
-	}
 	
 }
