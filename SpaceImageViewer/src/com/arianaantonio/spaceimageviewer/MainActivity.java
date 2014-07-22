@@ -44,18 +44,18 @@ import com.arianaantonio.networkconnection.NetworkConnect;
 //import com.arianaantonio.networkjar.networkConnection;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements MainFragment.ParentListener {
 	
 	//global variables
 	
 	Context mContext;
 	FileManager mFile;
 	String mFileName = "ImageFile.txt";
-	ListView listView;
+	//
 
 	private static FileManager fileManager = FileManager.getInstance();
 	final MyHandler handler = new MyHandler(this);
-	ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
+	//ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
 	
 	
 
@@ -65,9 +65,10 @@ public class MainActivity extends Activity {
 		
 		mContext = this;
 		mFile = FileManager.getInstance();
-		listView = (ListView) findViewById(R.id.listView1);
+		//listView = (ListView) findViewById(R.id.listView1);
 		
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.fragment_main);
+		/*
 		//check if there's a saved instance and populate listView with it
 		if (savedInstanceState != null) {
 			Log.i("Main Activity", "working in first saved");
@@ -80,14 +81,14 @@ public class MainActivity extends Activity {
 						new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
 				listView = (ListView) findViewById(R.id.listView1);
 				listView.setAdapter(adapter);
-				Log.i("Main Activity", "working after my data not null");
+				Log.i("Main Activity", "working after my data not null"); 
 				
 			} else {
 				Log.i("Main Activity", "Did not save");
 			}
 		} else {
 			Log.i("Main Activity", "No saved instance");
-		}
+		}*/
 				
 		
 		//checking network connection from JAR
@@ -159,36 +160,41 @@ public class MainActivity extends Activity {
 		
 		Log.i("Main Activity", "working1");
 		for (int i = 0; i < jsonArray.length(); i++) {
-			HashMap<String, String> displayText = new HashMap<String, String>();
+			//HashMap<String, String> displayText = new HashMap<String, String>();
 			Log.i("Main Activity", "working2");
 			try {
-				String urlString = jsonArray.getJSONObject(i).getString("url_regular");
+				String url = jsonArray.getJSONObject(i).getString("url_regular");
 				String title = jsonArray.getJSONObject(i).getString("title");
 				String user = jsonArray.getJSONObject(i).getString("user");
 				String camera = jsonArray.getJSONObject(i).getString("imaging_cameras");
 				camera = camera.replace("[", "");
 				camera = camera.replace("]", "");
-				
-						
 				String hd = jsonArray.getJSONObject(i).getString("url_hd");
-				Log.i("Returned objects", title+ " " +user+" " +camera+ " " +urlString);
+				
+				Log.i("Returned objects", title+ " " +user+" " +camera+ " " +url);
+				
+				startMainFragment(url, title, user, camera, hd);
+				/*
 				displayText.put("title", title);
 				displayText.put("user", user);
 				displayText.put("imaging_cameras", camera);
 				displayText.put("url", urlString);
 				displayText.put("hdImage", hd);
 				Log.i("Main Activity", "working3");
+				*/
 			} catch (JSONException e) {
 				Log.e("Error displaying data in listview", e.getMessage().toString());
 				e.printStackTrace();
 			}
+				/*
 			myData.add(displayText);
 			Log.i("Main Activity", "working4");
 			SimpleAdapter adapter = new SimpleAdapter(this, myData, R.layout.advance_listview,
 					new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
 			Log.i("Main Activity", "working5");
 			listView = (ListView) findViewById(R.id.listView1);
-			listView.setAdapter(adapter);
+			listView.setAdapter(adapter);*/
+			/*
 			listView.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
@@ -201,8 +207,9 @@ public class MainActivity extends Activity {
 					String urlString = (String)selectedListItem.get("url");
 					String hdString = (String)selectedListItem.get("hdImage");
 					Log.i("Item Selected", "name: " +usernameString);
-					
-					
+					*/
+					//startDetailActivity(usernameString, titleString, urlString, cameraString, hdString);
+					/*
 					Intent detailActivity = new Intent(getBaseContext(), DetailsActivity.class);
 					detailActivity.putExtra("user", usernameString);
 					detailActivity.putExtra("title", titleString); 
@@ -214,10 +221,23 @@ public class MainActivity extends Activity {
 					Log.i("Main Activity", "working7");
 				}
 				
-			});
+			});*/
 			
 		}
 	}
+
+	/*
+	public void startDetailActivity(String username, String title, String url, String camera, String hdUrl ) {
+		Intent detailActivity = new Intent(getBaseContext(), DetailsActivity.class);
+		detailActivity.putExtra("user", username);
+		detailActivity.putExtra("title", title); 
+		detailActivity.putExtra("url", url);
+		detailActivity.putExtra("camera", camera);
+		detailActivity.putExtra("hdImage", hdUrl);
+		Log.i("Main Activity", "working6");
+		startActivityForResult(detailActivity, 0);
+		Log.i("Main Activity", "working7");
+	}*/
 	//when detail activity finishes and passes back data, receive data and run dialog
 	protected void onActivityResult(int requestCode, int resultCode, Intent dataPassing) {
 		Log.i("Main Activity", "Pulling passed data");
@@ -255,6 +275,7 @@ public class MainActivity extends Activity {
 			}
 		}
 	}
+	/*
 	//saving instance state of listView
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
@@ -264,7 +285,7 @@ public class MainActivity extends Activity {
 			outState.putSerializable("saved", (Serializable) myData);
 			Log.i("Main Activity", "Saving instance state");
 		}
-	}
+	}*/
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -272,5 +293,16 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+	@Override
+	public void startMainFragment(String urlString, String titleString, String userString,
+			String cameraString, String hdString) {
+	
+		//urlString = urlString;
+		//titleString = title;
+		//userString = user;
+		//cameraString = camera;
+		//hdString = hd;
+		
+	}
+	
 }

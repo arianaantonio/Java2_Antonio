@@ -26,19 +26,21 @@ import android.widget.TextView;
 import com.loopj.android.image.SmartImageView;
 
 public class DetailsActivity extends Activity {
+	/*
 	RatingBar ratingBar;
 	float rating;
 	Button hdButton;
 	TextView titleView;
 	TextView userView;
 	TextView cameraView;
-	String hdString;
+	String hdString;*/
 	//Uri imageUri;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.details_activity);
+		setContentView(R.layout.fragment_detail);
+		/*
 		titleView = (TextView) findViewById(R.id.title);
 		userView = (TextView) findViewById(R.id.userName);
 		cameraView = (TextView) findViewById(R.id.cameraType);
@@ -55,26 +57,22 @@ public class DetailsActivity extends Activity {
 				
 				return false;
 			}
-		});
-
+		});*/
+/*
 		Bundle data = getIntent().getExtras();
 		
 		if(data != null){
 			Log.i("Detail Activity", "working5");
-			String user = data.getString("user");
-			String url = data.getString("url");
-			String camera = data.getString("camera");
-			String title = data.getString("title");
+			String userString = data.getString("user");
+			String urlString = data.getString("url");
+			String cameraString = data.getString("camera");
+			String titleString = data.getString("title");
 			hdString = data.getString("hdImage");
 			Log.i("Detail Activity", "Inside Data");
-			final SmartImageView imageView = (SmartImageView) findViewById(R.id.my_image);
-			imageView.setImageUrl(url);
-			Log.i("Detail Activity", "Brought over: " +user+ " " +url+ " " +title+ " " +camera);
-			titleView.setText(title);
-			userView.setText(user);
-			cameraView.setText(camera);
 			
+			displayDetails(userString, titleString, urlString, cameraString, hdString);
 		}
+		
 		hdButton = (Button) findViewById(R.id.button1);
 		hdButton.setOnClickListener(new OnClickListener() {
 			
@@ -85,8 +83,17 @@ public class DetailsActivity extends Activity {
 				startActivity(websiteIntent);
 				
 			}
-		});
-	}
+		});*/
+}
+	/*
+	public void displayDetails(String username, String title, String url, String camera, String hdUrl) {
+		final SmartImageView imageView = (SmartImageView) findViewById(R.id.my_image);
+		imageView.setImageUrl(url);
+		Log.i("Detail Activity", "Brought over: " +username+ " " +url+ " " +title+ " " +camera);
+		titleView.setText(title);
+		userView.setText(username);
+		cameraView.setText(camera);
+	}*/
 	//when detail activity finishes, pass back the image title and rating value
 	@Override
 	public void finish() {
@@ -97,7 +104,7 @@ public class DetailsActivity extends Activity {
 		
 		Intent dataPassing = new Intent();
 		dataPassing.putExtra("title", titleString);
-		dataPassing.putExtra("rating", rating);
+		//dataPassing.putExtra("rating", rating);
 		
 		setResult(RESULT_OK, dataPassing);
 		super.finish();
