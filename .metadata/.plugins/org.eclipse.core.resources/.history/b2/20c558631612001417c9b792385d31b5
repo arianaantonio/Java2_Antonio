@@ -28,7 +28,7 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 	public interface ParentListener {
 		//void displayDetailedData(Intent intent, int position);
 		void startActivityForResult(Intent intent, int position);
-		void passBackClickedItem(HashMap<String, String> item);
+	
 	}
 	
 	public MainFragment() {
@@ -104,15 +104,10 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 				// TODO Auto-generated method stub
 				HashMap<String, String> selectedListItem = myData.get(position);
 				Log.i("Main Fragment Listview", "Selected" +selectedListItem);
-				listener.passBackClickedItem(selectedListItem);
 			}
 			
 		});
 	}
-	//protected void passBackClickedItem(HashMap<String, String> selectedListItem) {
-		// TODO Auto-generated method stub
-		
-	//}
 	
 	
 

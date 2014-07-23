@@ -104,15 +104,15 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 				// TODO Auto-generated method stub
 				HashMap<String, String> selectedListItem = myData.get(position);
 				Log.i("Main Fragment Listview", "Selected" +selectedListItem);
-				listener.passBackClickedItem(selectedListItem);
+				passBackClickedItem(selectedListItem);
 			}
 			
 		});
 	}
-	//protected void passBackClickedItem(HashMap<String, String> selectedListItem) {
+	protected void passBackClickedItem(HashMap<String, String> selectedListItem) {
 		// TODO Auto-generated method stub
 		
-	//}
+	}
 	
 	
 

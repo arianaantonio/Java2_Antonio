@@ -327,9 +327,8 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 	@Override
 	public void passBackClickedItem(HashMap<String, String> item) {
 		// TODO Auto-generated method stub
-		Log.i("Main Activty passed", "Selected" +item);
-		Intent detailActivity = new Intent(getBaseContext(), DetailsActivity.class);
-		detailActivity.putExtra("clicked data", item);
-		startActivityForResult(detailActivity, 0);
+		
 	}
+	
+	
 }
