@@ -55,7 +55,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 
 	private static FileManager fileManager = FileManager.getInstance();
 	final MyHandler handler = new MyHandler(this);
-	ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
+	//ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
 	
 	
 
@@ -186,13 +186,13 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 				newFragment.setArguments(data);
 				Log.i("Main Activity", "working3");*/
 				
-				//MainFragment fragment = new MainFragment();
+				MainFragment fragment = new MainFragment();
 				//fragment.displayData(user, camera, title, url, hd);
 				
 		
 				
 				HashMap<String, String> displayText = new HashMap<String, String>();
-				//ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
+				ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
 				Log.i("Main Activity", "working 2.5");
 				displayText.put("title", title);
 				displayText.put("user", user);
@@ -201,7 +201,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 				displayText.put("hdImage", hd);
 				Log.i("Main Activity", "working3");
 				myData.add(displayText);
-				//fragment.displayData(myData);
+				fragment.displayData(myData);
 				
 				//myData.add(displayText);
 				
@@ -251,8 +251,6 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 			});*/
 			
 		}
-		MainFragment fragment = new MainFragment();
-		fragment.displayData(myData);
 	}
 
 	/*

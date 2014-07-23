@@ -55,7 +55,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 
 	private static FileManager fileManager = FileManager.getInstance();
 	final MyHandler handler = new MyHandler(this);
-	ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
+	//ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
 	
 	
 
@@ -101,7 +101,8 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		}
 			
 		final MyHandler handler = new MyHandler(this);
-		
+		MainFragment fragment = new MainFragment();
+		fragment.displayData("Hello");
 		getData(handler);
 		setContentView(R.layout.fragment_main);
 	} 
@@ -173,9 +174,8 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 				
 				Log.i("Returned objects", title+ " " +user+" " +camera+ " " +url);
 				
-				/*
-				Bundle data = new Bundle();
 				
+				Bundle data = new Bundle();
 				data.putString("title", title);
 				data.putString("user", user);
 				data.putString("camera", camera);
@@ -184,24 +184,19 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 				
 				MainFragment newFragment = new MainFragment();
 				newFragment.setArguments(data);
-				Log.i("Main Activity", "working3");*/
-				
-				//MainFragment fragment = new MainFragment();
-				//fragment.displayData(user, camera, title, url, hd);
+				Log.i("Main Activity", "working3");
 				
 		
-				
+				/*
 				HashMap<String, String> displayText = new HashMap<String, String>();
-				//ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
+				ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
 				Log.i("Main Activity", "working 2.5");
 				displayText.put("title", title);
 				displayText.put("user", user);
 				displayText.put("imaging_cameras", camera);
 				displayText.put("url", url);
 				displayText.put("hdImage", hd);
-				Log.i("Main Activity", "working3");
-				myData.add(displayText);
-				//fragment.displayData(myData);
+				Log.i("Main Activity", "working3");*/
 				
 				//myData.add(displayText);
 				
@@ -251,8 +246,6 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 			});*/
 			
 		}
-		MainFragment fragment = new MainFragment();
-		fragment.displayData(myData);
 	}
 
 	/*

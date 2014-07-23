@@ -69,15 +69,15 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 			Log.i("Main Activity", "No saved instance");
 		}*/
 		View view = inflater.inflate(R.layout.activity_main, container);
-		//Log.i("Main Fragment", "working before call");
+		Log.i("Main Fragment", "working before call");
 		//MainFragment newFragment = new MainFragment();
 	
 		//newFragment.getArguments().toString(); 
 		//String user = this.getArguments().getString("user"); 
-		//Log.i("Main Fragment", "working after call");
+		Log.i("Main Fragment", "working after call");
 		//Log.i("In fragment", "user: " + user);
 		//View view = inflater.inflate(R.layout.activity_main, container);
-		//Log.i("Main Fragment", "working after call2");
+		Log.i("Main Fragment", "working after call2");
 		listView = (ListView) view.findViewById(R.id.listView1);
 		return view;
 	 
@@ -109,11 +109,11 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 		Log.i("Main Fragment", "working3");
 		
 		myData.add(displayText);*/ 
-		//context = getActivity();
+		Context context;
 		myData = data; 
-		Log.i("My Data", myData.toString());   
+		Log.i("My Data", myData.toString());
 		Log.i("Main Fragment", "working4");
-		SimpleAdapter adapter = new SimpleAdapter(context, myData, R.layout.advance_listview, 
+		SimpleAdapter adapter = new SimpleAdapter(getActivity(), myData, R.layout.advance_listview,
 				new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
 		Log.i("Main Fragment", "working5");
 		//listView = (ListView) view.findViewById(R.id.listView1);

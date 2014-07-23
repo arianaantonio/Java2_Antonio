@@ -63,7 +63,7 @@ public class ServiceClass extends IntentService {
 	
 	_apiURL = "http://www.astrobin.com/api/v1/image/?title__icontains=spiral&api_key=e5ca219df4572fd4f187f3e6c4192e24af7e78f8&api_secret=5d4bf7b7097eed09a878af19a475fb879a36b916&format=json";
 	String content = getData(_apiURL);
-	//Log.i("Service Class", content);
+	Log.i("Service Class", content);
 	
 	Bundle extra = intent.getExtras();
 	Messenger messenger = (Messenger) extra.get(MESSENGER_KEY);
@@ -114,7 +114,7 @@ public class ServiceClass extends IntentService {
 				responseBuffer.append(response);
 			}
 			response = responseBuffer.toString();
-			//Log.i(TAG, response);
+			Log.i(TAG, response);
 		} catch (IOException e) {
 			response = "There was an error getting the data";
 			Log.e(TAG, "Unable to get data", e);
