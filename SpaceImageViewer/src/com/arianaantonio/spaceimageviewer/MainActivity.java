@@ -39,7 +39,7 @@ import com.arianaantonio.networkconnection.NetworkConnect;
 //import com.arianaantonio.networkjar.networkConnection;
 
 
-public class MainActivity extends Activity implements MainFragment.ParentListener {
+public class MainActivity extends Activity implements MainFragment.ParentListener, DetailFragment.ParentListener {
 	
 	//global variables
 	
@@ -324,12 +324,29 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	@Override
-	public void passBackClickedItem(HashMap<String, String> item) {
+	public void passToDetail(HashMap<String, String> item) {
 		// TODO Auto-generated method stub
 		Log.i("Main Activty passed", "Selected" +item);
 		Intent detailActivity = new Intent(getBaseContext(), DetailsActivity.class);
 		detailActivity.putExtra("clicked data", item);
 		startActivityForResult(detailActivity, 0);
+	}
+	@Override
+	public void passBackClickedItem(HashMap<String, String> item) {
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("clicked data", item);
+		FragmentManager manager = getFragmentManager();
+		DetailFragment fragment = (DetailFragment) manager.findFragmentById(R.id.detailfragment);
+		if (fragment != null && fragment.isInLayout()) {
+			fragment.displayDetails(bundle);
+		} else {
+			passToDetail(item);
+		}
+		
+		
+		/*Log.i("Main Activty passed", "Selected" +item);
+		Intent detailActivity = new Intent(getBaseContext(), DetailsActivity.class);
+		detailActivity.putExtra("clicked data", item);
+		startActivityForResult(detailActivity, 0);*/
 	}
 }

@@ -10,22 +10,20 @@
  */
 package com.arianaantonio.spaceimageviewer;
 
+import java.util.HashMap;
+
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
-import android.widget.Button;
-import android.widget.RatingBar;
+
 import android.widget.TextView;
 
-import com.loopj.android.image.SmartImageView;
 
-public class DetailsActivity extends Activity {
+
+public class DetailsActivity extends Activity implements DetailFragment.ParentListener {
 	/*
 	RatingBar ratingBar;
 	float rating;
@@ -39,7 +37,12 @@ public class DetailsActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fragment_detail);
+		
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			finish();
+			return;
+		}
+		//setContentView(R.layout.fragment_detail);
 		/*
 		titleView = (TextView) findViewById(R.id.title);
 		userView = (TextView) findViewById(R.id.userName);
@@ -58,21 +61,32 @@ public class DetailsActivity extends Activity {
 				return false;
 			}
 		});*/
-/*
+
 		Bundle data = getIntent().getExtras();
 		
 		if(data != null){
+			//HashMap<String, String> passedData = data.getString("clicked data");
+			//String passedData = (String) data.getString("clicked data");
 			Log.i("Detail Activity", "working5");
 			String userString = data.getString("user");
 			String urlString = data.getString("url");
-			String cameraString = data.getString("camera");
+			String cameraString = data.getString("imaging_cameras");
 			String titleString = data.getString("title");
-			hdString = data.getString("hdImage");
-			Log.i("Detail Activity", "Inside Data");
+			String hdString = data.getString("hdImage");
+			Log.i("Detail Activity", "Data:" + data);
 			
-			displayDetails(userString, titleString, urlString, cameraString, hdString);
+			FragmentManager manager = getFragmentManager();
+			DetailFragment fragment = (DetailFragment) manager.findFragmentById(R.id.detailfragment);
+			if (fragment !=null) {
+				fragment.displayDetails(data);
+			} else {
+				fragment = new DetailFragment();
+				fragment.displayDetails(data); 
+			}
 		}
 		
+		setContentView(R.layout.fragment_detail);
+		/*
 		hdButton = (Button) findViewById(R.id.button1);
 		hdButton.setOnClickListener(new OnClickListener() {
 			
@@ -83,7 +97,7 @@ public class DetailsActivity extends Activity {
 				startActivity(websiteIntent);
 				
 			}
-		});*/
+		});*/ 
 }
 	/*
 	public void displayDetails(String username, String title, String url, String camera, String hdUrl) {
@@ -99,14 +113,14 @@ public class DetailsActivity extends Activity {
 	public void finish() {
 		Log.i("Detail Activity", "Activity Finished");
 		
-		TextView title = (TextView) findViewById(R.id.title);
-		String titleString = title.getText().toString();
+		//TextView title = (TextView) findViewById(R.id.title);
+		//String titleString = title.getText().toString();
 		
-		Intent dataPassing = new Intent();
-		dataPassing.putExtra("title", titleString);
+		//Intent dataPassing = new Intent();
+		//dataPassing.putExtra("title", titleString);
 		//dataPassing.putExtra("rating", rating);
 		
-		setResult(RESULT_OK, dataPassing);
+		//setResult(RESULT_OK, dataPassing);
 		super.finish();
 	}
 }
