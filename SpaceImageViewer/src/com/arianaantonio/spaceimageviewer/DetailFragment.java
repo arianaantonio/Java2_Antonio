@@ -34,10 +34,11 @@ public class DetailFragment extends Fragment {
 	String title;
 	SmartImageView imageView;
 	View view;
+	@SuppressWarnings("unused")
 	private Context context; 
 	private ParentListener listener;
 	public interface ParentListener {
-		
+		 void passRatingInfo(Intent dataPassing);
 	}
 	@Override
 	public void onAttach(Activity activity) {
@@ -67,21 +68,35 @@ public class DetailFragment extends Fragment {
 		cameraView = (TextView) view.findViewById(R.id.cameraType);
 		hdButton = (Button) view.findViewById(R.id.button1);
 		ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
+		ratingBar.setRating(0);
 		ratingBar.setOnTouchListener(new OnTouchListener() {
 			
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
+				
 				rating = ratingBar.getRating();
-				//listener.setRating(rating);
 				String ratingValue = String.valueOf(rating);
 				Log.i("Favorite", ratingValue);
+				Intent dataPassing = new Intent();
+				dataPassing.putExtra("title", title);
+				dataPassing.putExtra("rating", rating);
+				listener.passRatingInfo(dataPassing);
 				
 				return false;
 			}
 		});
+		//passRating();
 		
 		return view;
 }
+	public void passRating() {
+		Intent dataPassing = new Intent();
+		dataPassing.putExtra("title", title);
+		dataPassing.putExtra("rating", rating);
+		listener.passRatingInfo(dataPassing);
+		
+	}
+	 
 	public void displayDetails(Bundle bundle) {
 		//final SmartImageView imageView = (SmartImageView) view.findViewById(R.id.my_image);
 		//imageView.setImageUrl(url);

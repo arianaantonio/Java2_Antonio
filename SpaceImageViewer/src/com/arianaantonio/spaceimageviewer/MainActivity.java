@@ -36,55 +36,26 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.arianaantonio.networkconnection.NetworkConnect;
-//import com.arianaantonio.networkjar.networkConnection;
+
 
 
 public class MainActivity extends Activity implements MainFragment.ParentListener, DetailFragment.ParentListener {
 	
 	//global variables
-	
 	Context mContext;
 	FileManager mFile;
 	String mFileName = "ImageFile.txt";
-	//
 
 	private static FileManager fileManager = FileManager.getInstance();
 	final MyHandler handler = new MyHandler(this);
 	ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
 	
-	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		mContext = this;
 		mFile = FileManager.getInstance();
-		//listView = (ListView) findViewById(R.id.listView1);
-		
-		//setContentView(R.layout.fragment_main);
-		/*
-		//check if there's a saved instance and populate listView with it
-		if (savedInstanceState != null) {
-			Log.i("Main Activity", "working in first saved");
-			myData = (ArrayList<HashMap<String, String>>) savedInstanceState.getSerializable("saved"); 
-			
-			if (myData != null) {
-				Log.i("Main Activity", "work in mydata not null");
-				Log.i("Main Activity", "Saved Instance");
-				SimpleAdapter adapter = new SimpleAdapter(this, myData, R.layout.advance_listview,
-						new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
-				listView = (ListView) findViewById(R.id.listView1);
-				listView.setAdapter(adapter);
-				Log.i("Main Activity", "working after my data not null"); 
-				
-			} else {
-				Log.i("Main Activity", "Did not save");
-			}
-		} else {
-			Log.i("Main Activity", "No saved instance");
-		}*/
-				
 		
 		//checking network connection from JAR
 		NetworkConnect networkConnection = new NetworkConnect();
@@ -168,24 +139,6 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 				
 				Log.i("Returned objects", title+ " " +user+" " +camera+ " " +url);
 				
-				/*
-				Bundle data = new Bundle();
-				
-				data.putString("title", title);
-				data.putString("user", user);
-				data.putString("camera", camera);
-				data.putString("url", url);
-				data.putString("hd url", hd);
-				
-				MainFragment newFragment = new MainFragment();
-				newFragment.setArguments(data);
-				Log.i("Main Activity", "working3");*/
-				
-				//MainFragment fragment = new MainFragment();
-				//fragment.displayData(user, camera, title, url, hd);
-				
-		
-				
 				HashMap<String, String> displayText = new HashMap<String, String>();
 				//ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
 				Log.i("Main Activity", "working 2.5");
@@ -196,55 +149,12 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 				displayText.put("hdImage", hd);
 				Log.i("Main Activity", "working3");
 				myData.add(displayText);
-				//fragment.displayData(myData);
 				
-				//myData.add(displayText);
-				
-				//MainFragment newFragment = new MainFragment();
-				//Bundle data = new Bundle();
-				//data.putStringArrayList("list data", myData);
-				//data.put
 			} catch (JSONException e) {
 				Log.e("Error displaying data in listview", e.getMessage().toString());
 				e.printStackTrace();
 			}
-				/*
-			myData.add(displayText);
-			Log.i("Main Activity", "working4");
-			SimpleAdapter adapter = new SimpleAdapter(this, myData, R.layout.advance_listview,
-					new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
-			Log.i("Main Activity", "working5");
-			listView = (ListView) findViewById(R.id.listView1);
-			listView.setAdapter(adapter);*/
-			/*
-			listView.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1,
-						int position, long arg3) {
-					HashMap<String, String> selectedListItem = myData.get(position);
-					String usernameString = (String)selectedListItem.get("user");
-					String cameraString = (String)selectedListItem.get("imaging_cameras");
-					String titleString = (String)selectedListItem.get("title");
-					String urlString = (String)selectedListItem.get("url");
-					String hdString = (String)selectedListItem.get("hdImage");
-					Log.i("Item Selected", "name: " +usernameString);
-					*/
-					//startDetailActivity(usernameString, titleString, urlString, cameraString, hdString);
-					/*
-					Intent detailActivity = new Intent(getBaseContext(), DetailsActivity.class);
-					detailActivity.putExtra("user", usernameString);
-					detailActivity.putExtra("title", titleString); 
-					detailActivity.putExtra("url", urlString);
-					detailActivity.putExtra("camera", cameraString);
-					detailActivity.putExtra("hdImage", hdString);
-					Log.i("Main Activity", "working6");
-					startActivityForResult(detailActivity, 0);
-					Log.i("Main Activity", "working7");
-				}
 				
-			});*/
-			
 		}
 		FragmentManager manager = getFragmentManager();
 		MainFragment fragment = (MainFragment) manager.findFragmentById(R.id.main_fragment);
@@ -254,21 +164,8 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 			fragment = new MainFragment();
 			fragment.displayData(myData); 
 		}
-		//fragment.displayData(myData);
 	}
 
-	/*
-	public void startDetailActivity(String username, String title, String url, String camera, String hdUrl ) {
-		Intent detailActivity = new Intent(getBaseContext(), DetailsActivity.class);
-		detailActivity.putExtra("user", username);
-		detailActivity.putExtra("title", title); 
-		detailActivity.putExtra("url", url);
-		detailActivity.putExtra("camera", camera);
-		detailActivity.putExtra("hdImage", hdUrl);
-		Log.i("Main Activity", "working6");
-		startActivityForResult(detailActivity, 0);
-		Log.i("Main Activity", "working7");
-	}*/
 	//when detail activity finishes and passes back data, receive data and run dialog
 	protected void onActivityResult(int requestCode, int resultCode, Intent dataPassing) {
 		Log.i("Main Activity", "Pulling passed data");
@@ -277,7 +174,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 			if (dataPassing.hasExtra("rating") && dataPassing.hasExtra("title")) {
 				Float rating = dataPassing.getExtras().getFloat("rating");
 				String title = dataPassing.getExtras().getString("title");
-				
+				Log.i("Activity Result", "Rating: " +rating+ "Title: " +title);
 				AlertDialog.Builder ratingDialog = new AlertDialog.Builder(this);
 				
 				if (rating.toString() == "0.0") {
@@ -306,18 +203,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 			}
 		}
 	}
-	/*
-	//saving instance state of listView
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		
-		if (myData != null && !myData.isEmpty()) {
-			outState.putSerializable("saved", (Serializable) myData);
-			Log.i("Main Activity", "Saving instance state");
-		}
-	}*/
-
+	
 	@Override 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -325,7 +211,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		return true;
 	}
 	public void passToDetail(HashMap<String, String> item) {
-		// TODO Auto-generated method stub
+		
 		Log.i("Main Activty passed", "Selected" +item);
 		Intent detailActivity = new Intent(getBaseContext(), DetailsActivity.class);
 		detailActivity.putExtra("clicked data", item);
@@ -343,10 +229,17 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 			passToDetail(item);
 		}
 		
+	}
+	@Override
+	public void passRatingInfo(Intent dataPassing) {
+		Log.i("Main Activity", "inside passRatingInfo");
 		
-		/*Log.i("Main Activty passed", "Selected" +item);
-		Intent detailActivity = new Intent(getBaseContext(), DetailsActivity.class);
-		detailActivity.putExtra("clicked data", item);
-		startActivityForResult(detailActivity, 0);*/
+		int requestCode = 0;
+		int resultCode = RESULT_OK;
+		Log.i("Main Activity", "inside passRatingInfo");
+		if (dataPassing != null) {
+			onActivityResult(requestCode, resultCode, dataPassing); 
+		}
+		
 	}
 }
