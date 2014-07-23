@@ -108,10 +108,10 @@ public class DetailFragment extends Fragment {
 			}
 		});*/
 		//passRating();
-		 
+		
 		Bundle data2 = getActivity().getIntent().getExtras();
 		Log.i("Detail Activity", "Create bundle: " +data2);
-		  if(data2 != null){
+		  if(data != null){
 		   Log.i("Detail Activity", "working5");
 		  
 		   //displayDetails(userString, titleString, urlString, cameraString,hdString);

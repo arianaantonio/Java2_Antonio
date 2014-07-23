@@ -51,7 +51,7 @@ public class MainFragment extends Fragment {
 		listView = (ListView) view.findViewById(R.id.listView1);
 		return view;
 	 }
-	//get api data passed from main activity and display to listview
+
 	public void displayData(ArrayList<HashMap<String, String>> data) {
 		myData = data; 
 		Log.i("My Data", myData.toString());   

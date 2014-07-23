@@ -29,7 +29,6 @@ public class DetailFragment extends Fragment {
 	private TextView cameraView;
 	private String hdUrl;
 	private String title;
-	HashMap<String, String> data;
 	private SmartImageView imageView;
 	View view;
 	
@@ -54,25 +53,6 @@ public class DetailFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		context = getActivity();
-		
-		if (savedInstanceState != null) {
-			Log.i("Main Activity", "working in first saved");
-			if (data != null) {
-				Log.i("Main Activity", "working after my data not null"); 
-				Bundle data2 = getActivity().getIntent().getExtras();
-				Log.i("Detail Activity", "Create bundle: " +data2);
-				  if(data != null){
-				   Log.i("Detail Activity", "working5");
-				  
-				   //displayDetails(userString, titleString, urlString, cameraString,hdString);
-				   displayDetails(data2);
-				 }
-			} else {
-				Log.i("Main Activity", "Did not save");
-			}
-		} else {
-			Log.i("Main Activity", "No saved instance");
-		}
 		
 	} 
 	
@@ -108,14 +88,14 @@ public class DetailFragment extends Fragment {
 			}
 		});*/
 		//passRating();
-		 
-		Bundle data2 = getActivity().getIntent().getExtras();
-		Log.i("Detail Activity", "Create bundle: " +data2);
-		  if(data2 != null){
+		
+		Bundle data = getActivity().getIntent().getExtras();
+		Log.i("Detail Activity", "Create bundle: " +data);
+		  if(data != null){
 		   Log.i("Detail Activity", "working5");
 		  
 		   //displayDetails(userString, titleString, urlString, cameraString,hdString);
-		   displayDetails(data2);
+		   displayDetails(data);
 		 }
 		return view;
 }
@@ -138,7 +118,7 @@ public class DetailFragment extends Fragment {
 		  //Log.i("Detail Fragment", "titleView" +titleView);
 		  if (titleView == null) {
 			  Log.i("Detail Fragment", "titleView is null");
-		  } else {//if data is null, phone is in  landscape and data is in a differently named bundle
+		  } else {
 			  if (data == null) {
 				  @SuppressWarnings("unchecked")
 				  HashMap<String, String> data1 = (HashMap<String, String>)bundle.getSerializable("clicked data");
@@ -179,14 +159,5 @@ public class DetailFragment extends Fragment {
 		  }
 		  Log.i("Detail Fragment", "working 7");
 		
-	}
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		
-		if (data != null && !data.isEmpty()) {
-			outState.putSerializable("saved", (Serializable) data);
-			Log.i("Main Activity", "Saving instance state");
-		}
 	}
 }

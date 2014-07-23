@@ -31,7 +31,7 @@ public class DetailsActivity extends Activity implements DetailFragment.ParentLi
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//check if phone is in landscape, finish if it is as Main Activity will handle data passing
+		
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			finish();
 			return;
@@ -40,7 +40,7 @@ public class DetailsActivity extends Activity implements DetailFragment.ParentLi
 		Bundle data = getIntent().getExtras();
 		
 		if(data != null){
-			//passing data to detail fragment
+			
 			FragmentManager manager = getFragmentManager();
 			DetailFragment fragment = (DetailFragment) manager.findFragmentById(R.id.detailfragment);
 			if (fragment !=null) {

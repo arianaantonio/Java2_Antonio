@@ -33,8 +33,6 @@ import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.arianaantonio.networkconnection.NetworkConnect;
@@ -212,7 +210,6 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	//portrait mode: data of selected listview item sent back from the main fragment and passed to detail fragment
 	public void passToDetail(HashMap<String, String> item) {
 		Log.i("Main Activty passed", "Selected" +item);
 		Intent detailActivity = new Intent(getBaseContext(), DetailsActivity.class);
@@ -223,21 +220,17 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		 startActivityForResult(detailActivity, 0);
 		 Log.i("passToDetail", "working");
 	}
-	//landscape mode: data of selected listview item sent back from the main fragment and passed to detail fragment
 	@Override
 	public void passBackClickedItem(HashMap<String, String> item) {
-		
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("clicked data", item);
 		FragmentManager manager = getFragmentManager();
 		DetailFragment fragment = (DetailFragment) manager.findFragmentById(R.id.detailfragment);
 		if (fragment != null && fragment.isInLayout()) {
 			fragment.displayDetails(bundle);
-			Log.i("Main Activity", "Inside fragment isn't null");
 			
 		} else {
 			passToDetail(item);
-			Log.i("Main Activity", "pass to Detail");
 		}
 		
 	}

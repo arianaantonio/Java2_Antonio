@@ -29,7 +29,6 @@ public class DetailFragment extends Fragment {
 	private TextView cameraView;
 	private String hdUrl;
 	private String title;
-	HashMap<String, String> data;
 	private SmartImageView imageView;
 	View view;
 	
@@ -54,25 +53,6 @@ public class DetailFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		context = getActivity();
-		
-		if (savedInstanceState != null) {
-			Log.i("Main Activity", "working in first saved");
-			if (data != null) {
-				Log.i("Main Activity", "working after my data not null"); 
-				Bundle data2 = getActivity().getIntent().getExtras();
-				Log.i("Detail Activity", "Create bundle: " +data2);
-				  if(data != null){
-				   Log.i("Detail Activity", "working5");
-				  
-				   //displayDetails(userString, titleString, urlString, cameraString,hdString);
-				   displayDetails(data2);
-				 }
-			} else {
-				Log.i("Main Activity", "Did not save");
-			}
-		} else {
-			Log.i("Main Activity", "No saved instance");
-		}
 		
 	} 
 	
@@ -108,14 +88,14 @@ public class DetailFragment extends Fragment {
 			}
 		});*/
 		//passRating();
-		 
-		Bundle data2 = getActivity().getIntent().getExtras();
-		Log.i("Detail Activity", "Create bundle: " +data2);
-		  if(data2 != null){
+		
+		Bundle data = getActivity().getIntent().getExtras();
+		Log.i("Detail Activity", "Create bundle: " +data);
+		  if(data != null){
 		   Log.i("Detail Activity", "working5");
 		  
 		   //displayDetails(userString, titleString, urlString, cameraString,hdString);
-		   displayDetails(data2);
+		   displayDetails(data);
 		 }
 		return view;
 }
@@ -127,10 +107,25 @@ public class DetailFragment extends Fragment {
 		listener.passRatingInfo(dataPassing);
 		
 	}*/
-	//data is passed from detail activity and displayed to the detail fragment
+
 	public void displayDetails(Bundle bundle) {
 		 Log.i("Detail Fragment", "Bundle: " + bundle);
-		
+		 //final SmartImageView imageView = (SmartImageView)
+		//view.findViewById(R.id.my_image);
+		  //imageView.setImageUrl(url);
+		  //Log.i("Detail Fragment", "Bundle: " + bundle);
+		  	//Bundle moreData = bundle.getExtras();
+		  	//Serializable moredata = bundle.getSerializable("clicked data");
+		  	//Log.i("detail fragment", "here: " +moredata);
+		  	//String string = moredata.getString("clicked data");
+		  	//String string = bundle.getString("user"); 
+		  	//Log.i("display details", "bundle user: " +string);
+		    //bundle = getIntent().getExtras();
+		//  HashMap<String, String> data = (HashMap<String, String>) result;
+		//  Log.i("Detail Fragment", "HashMap" + data);
+		//  String username = data.get("user");
+		//  String url = data.get("url");
+		 
 		  @SuppressWarnings("unchecked")
 		 HashMap<String, String> data = (HashMap<String, String>)bundle.getSerializable("details");
 		  Log.i("Detail Fragment", "data " +data);
@@ -138,7 +133,7 @@ public class DetailFragment extends Fragment {
 		  //Log.i("Detail Fragment", "titleView" +titleView);
 		  if (titleView == null) {
 			  Log.i("Detail Fragment", "titleView is null");
-		  } else {//if data is null, phone is in  landscape and data is in a differently named bundle
+		  } else {
 			  if (data == null) {
 				  @SuppressWarnings("unchecked")
 				  HashMap<String, String> data1 = (HashMap<String, String>)bundle.getSerializable("clicked data");
@@ -177,16 +172,38 @@ public class DetailFragment extends Fragment {
 					});
 				 }
 		  }
+		  //titleView.setText(data.get("title"));
+		  //titleView.setText("Title two");
 		  Log.i("Detail Fragment", "working 7");
+		 /*
+		Log.i("Detail Fragment", "Bundle: " + bundle);
+		//bundle = this.getIntent().getExtras();
+		Serializable result = bundle.getSerializable("clicked data");
+		HashMap<String, String> data = (HashMap<String, String>) result;
+		Log.i("Detail Fragment", "HashMap" + data); 
+		String username = data.get("user");
+		String url = data.get("url");
+		title = data.get("title");
+		hdUrl = data.get("hdImage");
+		String camera = data.get("imaging_cameras"); 
+		Log.i("Detail Fragment", "User: " + username);
+		//Log.i("Detail Activity", "Brought over: " +username+ " " +url+ " " +title+ " " +camera);
+	
+		/*
+		titleView.setText(title); 
+		userView.setText(username);
+		cameraView.setText(camera); 
+		imageView.setImageUrl(url);
 		
-	}
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		
-		if (data != null && !data.isEmpty()) {
-			outState.putSerializable("saved", (Serializable) data);
-			Log.i("Main Activity", "Saving instance state");
-		}
+		hdButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Uri website = Uri.parse(hdUrl);
+				Intent websiteIntent = new Intent(Intent.ACTION_VIEW, website);
+				startActivity(websiteIntent);
+				
+			}
+		});*/
 	}
 }

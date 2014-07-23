@@ -29,7 +29,7 @@ public class DetailFragment extends Fragment {
 	private TextView cameraView;
 	private String hdUrl;
 	private String title;
-	HashMap<String, String> data;
+	private HashMap<String, String> data;
 	private SmartImageView imageView;
 	View view;
 	
@@ -57,16 +57,9 @@ public class DetailFragment extends Fragment {
 		
 		if (savedInstanceState != null) {
 			Log.i("Main Activity", "working in first saved");
-			if (data != null) {
+			if (myData != null) {
 				Log.i("Main Activity", "working after my data not null"); 
-				Bundle data2 = getActivity().getIntent().getExtras();
-				Log.i("Detail Activity", "Create bundle: " +data2);
-				  if(data != null){
-				   Log.i("Detail Activity", "working5");
-				  
-				   //displayDetails(userString, titleString, urlString, cameraString,hdString);
-				   displayDetails(data2);
-				 }
+				
 			} else {
 				Log.i("Main Activity", "Did not save");
 			}
@@ -108,14 +101,14 @@ public class DetailFragment extends Fragment {
 			}
 		});*/
 		//passRating();
-		 
-		Bundle data2 = getActivity().getIntent().getExtras();
-		Log.i("Detail Activity", "Create bundle: " +data2);
-		  if(data2 != null){
+		
+		Bundle data = getActivity().getIntent().getExtras();
+		Log.i("Detail Activity", "Create bundle: " +data);
+		  if(data != null){
 		   Log.i("Detail Activity", "working5");
 		  
 		   //displayDetails(userString, titleString, urlString, cameraString,hdString);
-		   displayDetails(data2);
+		   displayDetails(data);
 		 }
 		return view;
 }
@@ -132,7 +125,7 @@ public class DetailFragment extends Fragment {
 		 Log.i("Detail Fragment", "Bundle: " + bundle);
 		
 		  @SuppressWarnings("unchecked")
-		 HashMap<String, String> data = (HashMap<String, String>)bundle.getSerializable("details");
+		 data = (HashMap<String, String>)bundle.getSerializable("details");
 		  Log.i("Detail Fragment", "data " +data);
 		 // titleView = (TextView) view.findViewById(R.id.title);
 		  //Log.i("Detail Fragment", "titleView" +titleView);
