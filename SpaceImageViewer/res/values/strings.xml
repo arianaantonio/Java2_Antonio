@@ -17,6 +17,18 @@
     <string name="preferences">Preferences</string>
     <string name="search">Search</string>
     <string name="favorites">Favorites</string>
+    <string name="search_hint">Search Title</string>
+    <string-array name="background_colors">
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Purple</item>
+        <item>Pink</item>
+        <item>Brown</item>
+    </string-array>
+    <color name="Blue">#0E15E3</color>
+    <color name="Green">#30A307</color>
+    <color name="Pink">#E30EB1</color>
+    <color name="Brown">#75350B</color>
    
 
 </resources>

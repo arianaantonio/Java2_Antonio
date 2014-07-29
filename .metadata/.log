@@ -1632,3 +1632,6 @@ java.lang.ClassCastException: com.android.layoutlib.bridge.MockView cannot be ca
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:629)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:584)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1438)
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-07-28 23:14:05.616
+!MESSAGE Current file is not a match for the given config.

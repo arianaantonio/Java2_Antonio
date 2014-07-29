@@ -23,6 +23,8 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -32,9 +34,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.arianaantonio.networkconnection.NetworkConnect;
@@ -47,6 +53,8 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 	Context mContext;
 	FileManager mFile;
 	String mFileName = "ImageFile.txt";
+	public enum DialogType {SEARCH, PREFERENCES, FAVORITES};
+	//public Spinner spinner;
 
 	private static FileManager fileManager = FileManager.getInstance();
 	final MyHandler handler = new MyHandler(this);
@@ -55,9 +63,17 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		 
 		mContext = this;
 		mFile = FileManager.getInstance();
+		//Spinner spinner;  
+		/*
+		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, R.array.background_colors);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner.setAdapter(adapter);*/
+		
+		
 		
 		//checking network connection from JAR
 		NetworkConnect networkConnection = new NetworkConnect();
@@ -219,15 +235,30 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		switch (item.getItemId()) {
 		case R.id.search:
 			Log.i("Main Activity", "Selected 'Search'");
+			launchDialogFragment(DialogType.SEARCH);    
 			break;
 		case R.id.preferences:
 			Log.i("Main Activity", "Selected 'Preferences'");
+			//Spinner spinner = (Spinner) new Spinner(mContext);
+			//Spinner arrayForSpinner = new ArrayList<String>();
+			//arrayForSpinner = R.array.background_colors;
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, R.array.background_colors);
+			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+			spinner.setAdapter(adapter);
+			
+			launchDialogFragment(DialogType.PREFERENCES);
 			break;
 		case R.id.favorites:
 			Log.i("Main Activity", "Selected 'Favorites'");
+			
 			break;
 		}
 		return true;
+	}
+	public void launchDialogFragment(DialogType type) {
+		AlertDialogFragment dialogFragment = AlertDialogFragment.newInstance(type);
+		dialogFragment.show(getFragmentManager(), "search_dialog");
 	}
 	//portrait mode: data of selected listview item sent back from the main fragment and passed to detail fragment
 	public void passToDetail(HashMap<String, String> item) {
@@ -258,6 +289,64 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		}
 		
 	}
+	public static class AlertDialogFragment extends DialogFragment {
+		public static DialogType type;
+
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			LayoutInflater inflater = getActivity().getLayoutInflater();
+			switch(type) {
+			case PREFERENCES: 
+				builder.setView(inflater.inflate(R.layout.preferences_dialog, null))
+					.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							
+							
+						}
+					})
+					.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							AlertDialogFragment.this.getDialog().cancel();
+							
+						}
+					});
+				break;
+			case SEARCH:
+				builder.setView(inflater.inflate(R.layout.search_dialog, null))
+				.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						
+						
+					}
+				})
+				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						AlertDialogFragment.this.getDialog().cancel();
+						
+					}
+				});
+				
+				break;
+	
+			}
+			return builder.create();
+		}
+		public static AlertDialogFragment newInstance(DialogType dialogType) {
+			type = dialogType;
+			return new AlertDialogFragment();
+		}
+		
+	}
+
 	/*
 	@Override
 	public void passRatingInfo(Intent dataPassing) {
