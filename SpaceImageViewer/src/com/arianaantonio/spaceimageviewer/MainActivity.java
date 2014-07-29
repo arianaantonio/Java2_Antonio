@@ -33,8 +33,8 @@ import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.arianaantonio.networkconnection.NetworkConnect;
@@ -209,7 +209,24 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 	@Override 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.action_bar, menu);
 		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.search:
+			Log.i("Main Activity", "Selected 'Search'");
+			break;
+		case R.id.preferences:
+			Log.i("Main Activity", "Selected 'Preferences'");
+			break;
+		case R.id.favorites:
+			Log.i("Main Activity", "Selected 'Favorites'");
+			break;
+		}
 		return true;
 	}
 	//portrait mode: data of selected listview item sent back from the main fragment and passed to detail fragment

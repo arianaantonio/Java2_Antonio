@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Space Image Viewer</string>
+    <string name="action_settings">Settings</string>
+    <string name="textview_text">List of images of spiral galaxies</string>
+    <string name="detail_view">Details:</string>
+    <string name="Description">Image View</string>
+    <color name="Purple">#C285FF</color>
+    <color name="Grey">#D8D8D8</color>
+    <color name="Aqua">#99FFFF</color>
+    <string name="userString">User:</string>
+    <string name="cameraString">Camera:</string>
+    <string name="HDbutton">View HD Image</string>
+    <string name="detailactivity">Details Activity</string>
+    <string name="favorite">Save As Favorite</string>
+    <string name="preferences">Preferences</string>
+    <string name="search">search</string>
+    <string name="favorites">favorites</string>
+   
+
+</resources>

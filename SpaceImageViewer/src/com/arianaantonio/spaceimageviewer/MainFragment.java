@@ -58,7 +58,7 @@ public class MainFragment extends Fragment {
 		Log.i("Main Fragment", "working4"); 
 		SimpleAdapter adapter = new SimpleAdapter(context, myData, R.layout.advance_listview, 
 				new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
-		Log.i("Main Fragment", "working5");
+		Log.i("Main Fragment", "working5"); 
 	
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {

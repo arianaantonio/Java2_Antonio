@@ -14,6 +14,9 @@
     <string name="HDbutton">View HD Image</string>
     <string name="detailactivity">Details Activity</string>
     <string name="favorite">Save As Favorite</string>
+    <string name="preferences">Preferences</string>
+    <string name="search">Search</string>
+    <string name="favorites">Favorites</string>
    
 
 </resources>
