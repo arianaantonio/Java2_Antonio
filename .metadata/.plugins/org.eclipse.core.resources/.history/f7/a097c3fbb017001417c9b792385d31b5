@@ -35,8 +35,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.preference.PreferenceManager;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -61,7 +59,6 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 	SharedPreferences preferences;
 	static SharedPreferences.Editor edit;
 	static TextView titleView;
-	static EditText searchView;
 	//TextView titleView = (TextView) findViewById(R.id.listViewTitle);
 
 	private static FileManager fileManager = FileManager.getInstance();
@@ -73,8 +70,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_main);
 		mContext = this;
-		mFile = FileManager.getInstance(); 
-
+		mFile = FileManager.getInstance();
 		preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 		edit = preferences.edit();
 		if (preferences.getString("title", "").toString().isEmpty()) {
@@ -99,31 +95,6 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		final MyHandler handler = new MyHandler(this);
 		
 		getData(handler);
-		searchView = (EditText) findViewById(R.id.search_editText);
-		searchView.addTextChangedListener(new TextWatcher(){
-
-			@Override
-			public void afterTextChanged(Editable arg0) {
-				String text = searchView.getText().toString().toLowerCase();
-                adapter.filter(text);
-				
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
 		
 	} 
 	

@@ -13,20 +13,10 @@
         android:gravity="center"
         android:text="@string/textview_text" />
 
-    <EditText
-        android:id="@+id/search_editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/search_hint" >
-
-        <requestFocus />
-    </EditText>
-
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:layout_height="260dp"
-        android:layout_weight="0.21"
+        android:layout_weight="0.32"
         android:background="@color/Grey" />
 </LinearLayout>
