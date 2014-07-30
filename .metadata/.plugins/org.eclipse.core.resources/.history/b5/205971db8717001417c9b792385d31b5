@@ -1,0 +1,89 @@
+/*
+ * project SpaceImageViewer
+ * 
+ * packager com.arianaantonio.spaceimageviewer
+ * 
+ * @author Ariana Antonio
+ * 
+ * date Jul 29, 2014
+ * 
+ */
+package com.arianaantonio.spaceimageviewer;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.widget.TextView;
+
+public class FavoritesActivity extends Activity {
+
+	Context context;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.favorites_view);
+		
+		TextView favoritesView = (TextView) findViewById(R.id.favoritesTextView);
+		favoritesView.setText("Testing"); 
+		
+
+
+try {
+
+    BufferedReader inputReader = new BufferedReader(new InputStreamReader(
+
+            openFileInput("FavoritesFile.txt")));
+
+    String inputString;
+
+    StringBuffer stringBuffer = new StringBuffer();                
+
+    while ((inputString = inputReader.readLine()) != null) {
+
+        stringBuffer.append(inputString + "\n");
+
+    }
+
+    favoritesView.setText(stringBuffer.toString());
+
+} catch (IOException e) {
+
+    e.printStackTrace();
+
+}
+
+
+		/*
+		StringBuilder text = new StringBuilder();
+		Log.i("Favorites Activity", "Working 1");
+		try {
+			String filePath = context.getFilesDir().getPath().toString() + "/FavoritesFile.txt";
+			Log.i("Favorites Activity", "Filepath: " +filePath);
+			File file = new File(filePath);
+			
+		    //File file = new File("FavoritesFile.txt");
+		    Log.i("Favorites Activity", "Working 2");
+		    @SuppressWarnings("resource")
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+		    Log.i("Favorites Activity", "Working 3");
+		    String line;
+		    
+		    while ((line = reader.readLine()) != null) {
+		    	Log.i("Favorites Activity", "Working 4");
+		        text.append(line);
+		        System.out.print("text : " +text+ " : end");
+		        text.append("\n");
+		    }
+		    Log.i("Favorites Activity", "File content: " +text);
+		}
+		catch  (Exception e) {  
+		}*/
+	}
+
+}

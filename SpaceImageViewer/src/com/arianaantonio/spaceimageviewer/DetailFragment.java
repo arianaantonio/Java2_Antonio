@@ -1,6 +1,22 @@
+/*
+ * project SpaceImageViewer
+ * 
+ * packager com.arianaantonio.spaceimageviewer
+ * 
+ * @author Ariana Antonio
+ * 
+ * date Jul 29, 2014
+ * 
+ */
 package com.arianaantonio.spaceimageviewer;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import android.app.Activity;
@@ -11,8 +27,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RatingBar;
@@ -55,6 +73,7 @@ public class DetailFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		context = getActivity();
 		
+		
 		if (savedInstanceState != null) {
 			Log.i("Main Activity", "working in first saved");
 			if (data != null) {
@@ -90,7 +109,7 @@ public class DetailFragment extends Fragment {
 		imageView = (SmartImageView) view.findViewById(R.id.my_image);
 		ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
 		ratingBar.setRating(0);
-		/*
+		
 		ratingBar.setOnTouchListener(new OnTouchListener() {
 			
 			@Override
@@ -98,15 +117,36 @@ public class DetailFragment extends Fragment {
 				
 				rating = ratingBar.getRating();
 				String ratingValue = String.valueOf(rating);
-				Log.i("Favorite", ratingValue);
-				Intent dataPassing = new Intent(); 
-				dataPassing.putExtra("title", title);
-				dataPassing.putExtra("rating", rating);
-				listener.passRatingInfo(dataPassing);
+				
+				String title = titleView.getText().toString();
+				Log.i("Favorite", ratingValue + " " +title);
+				
+				BufferedWriter writer = null;
+				
+				try {
+					String filePath = context.getFilesDir().getPath().toString() + "/FavoritesFile.txt";
+					File file = new File(filePath);
+					System.out.println(file.getCanonicalPath());
+					writer = new BufferedWriter(new FileWriter(file, true));
+					String lineTitle = title+ "\n";
+		            writer.write(lineTitle);
+		            
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						writer.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+
+	            
+				
 				
 				return false;
 			}
-		});*/
+		});
 		//passRating();
 		 
 		Bundle data2 = getActivity().getIntent().getExtras();
@@ -134,8 +174,7 @@ public class DetailFragment extends Fragment {
 		  @SuppressWarnings("unchecked")
 		 HashMap<String, String> data = (HashMap<String, String>)bundle.getSerializable("details");
 		  Log.i("Detail Fragment", "data " +data);
-		 // titleView = (TextView) view.findViewById(R.id.title);
-		  //Log.i("Detail Fragment", "titleView" +titleView);
+		
 		  if (titleView == null) {
 			  Log.i("Detail Fragment", "titleView is null");
 		  } else {//if data is null, phone is in  landscape and data is in a differently named bundle

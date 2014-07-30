@@ -39,23 +39,25 @@ public final class R {
         public static final int ic_launcher=0x7f020003;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0014;
+        public static final int action_settings=0x7f0a0016;
         public static final int button1=0x7f0a0009;
         public static final int camera=0x7f0a0004;
         public static final int cameraType=0x7f0a0008;
-        public static final int detailfragment=0x7f0a000d;
-        public static final int favorites=0x7f0a0012;
-        public static final int imageView1=0x7f0a000f;
+        public static final int detailfragment=0x7f0a000f;
+        public static final int dialog_spinner=0x7f0a0012;
+        public static final int favorites=0x7f0a0014;
+        public static final int favoritesTextView=0x7f0a000e;
+        public static final int favoritesTitle=0x7f0a000d;
+        public static final int imageView1=0x7f0a0011;
         public static final int linearLayout1=0x7f0a0005;
         public static final int linearLayout2=0x7f0a0007;
         public static final int linearLayout3=0x7f0a000a;
         public static final int listView1=0x7f0a0001;
-        public static final int main_fragment=0x7f0a000e;
+        public static final int main_fragment=0x7f0a0010;
         public static final int my_image=0x7f0a000c;
-        public static final int preferences=0x7f0a0013;
+        public static final int preferences=0x7f0a0015;
         public static final int ratingBar=0x7f0a000b;
-        public static final int search=0x7f0a0011;
-        public static final int spinner1=0x7f0a0010;
+        public static final int search=0x7f0a0013;
         public static final int textView1=0x7f0a0000;
         public static final int title=0x7f0a0002;
         public static final int user=0x7f0a0003;
@@ -65,11 +67,12 @@ public final class R {
         public static final int activity_main=0x7f030000;
         public static final int advance_listview=0x7f030001;
         public static final int details_activity=0x7f030002;
-        public static final int fragment_detail=0x7f030003;
-        public static final int fragment_main=0x7f030004;
-        public static final int image_list=0x7f030005;
-        public static final int preferences_dialog=0x7f030006;
-        public static final int search_dialog=0x7f030007;
+        public static final int favorites_view=0x7f030003;
+        public static final int fragment_detail=0x7f030004;
+        public static final int fragment_main=0x7f030005;
+        public static final int image_list=0x7f030006;
+        public static final int preferences_dialog=0x7f030007;
+        public static final int search_dialog=0x7f030008;
     }
     public static final class menu {
         public static final int action_bar=0x7f090000;
@@ -86,6 +89,7 @@ public final class R {
         public static final int detailactivity=0x7f050008;
         public static final int favorite=0x7f050009;
         public static final int favorites=0x7f05000c;
+        public static final int favoritesactivity=0x7f05000e;
         public static final int preferences=0x7f05000a;
         public static final int search=0x7f05000b;
         public static final int search_hint=0x7f05000d;

@@ -27,6 +27,9 @@
         <activity
             android:name="com.arianaantonio.spaceimageviewer.DetailsActivity"
             android:label="@string/detailactivity" > </activity>
+        <activity
+            android:name="com.arianaantonio.spaceimageviewer.FavoritesActivity"
+            android:label="@string/favoritesactivity" > </activity>
         <service android:name="json.ServiceClass"></service>
     </application>
 

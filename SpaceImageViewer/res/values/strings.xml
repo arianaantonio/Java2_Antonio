@@ -16,7 +16,7 @@
     <string name="favorite">Save As Favorite</string>
     <string name="preferences">Preferences</string>
     <string name="search">Search</string>
-    <string name="favorites">Favorites</string>
+    <string name="favorites">Favorites:</string>
     <string name="search_hint">Search Title</string>
     <string-array name="background_colors">
         <item>Blue</item>
@@ -29,6 +29,7 @@
     <color name="Green">#30A307</color>
     <color name="Pink">#E30EB1</color>
     <color name="Brown">#75350B</color>
+    <string name="favoritesactivity">Favorites Activity</string>
    
 
 </resources>

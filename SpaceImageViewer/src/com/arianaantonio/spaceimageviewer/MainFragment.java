@@ -1,3 +1,13 @@
+/*
+ * project SpaceImageViewer
+ * 
+ * packager com.arianaantonio.spaceimageviewer
+ * 
+ * @author Ariana Antonio
+ * 
+ * date Jul 29, 2014
+ * 
+ */
 package com.arianaantonio.spaceimageviewer;
 
 import java.util.ArrayList;

@@ -39,8 +39,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Toast;
 
 import com.arianaantonio.networkconnection.NetworkConnect;
@@ -49,11 +49,13 @@ import com.arianaantonio.networkconnection.NetworkConnect;
 
 public class MainActivity extends Activity implements MainFragment.ParentListener, DetailFragment.ParentListener {
 	
-	//global variables
+	static //global variables
 	Context mContext;
 	FileManager mFile;
 	String mFileName = "ImageFile.txt";
 	public enum DialogType {SEARCH, PREFERENCES, FAVORITES};
+	//public final static Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+	
 	//public Spinner spinner;
 
 	private static FileManager fileManager = FileManager.getInstance();
@@ -66,12 +68,20 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		 
 		mContext = this;
 		mFile = FileManager.getInstance();
-		//Spinner spinner;  
-		/*
-		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, R.array.background_colors);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner.setAdapter(adapter);*/
+		Log.i("Main activity", "Working 8");
+				
+		//spinner = (Spinner) findViewById(R.id.spinner1);
+		//Spinner spinner;
+		Log.i("Main activity", "Working 9");
+		
+		//Spinner spinner = (Spinner) findViewById(R.id.dialog_spinner);
+		
+		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, R.array.background_colors);
+		Log.i("Main activity", "Working 10");
+		//adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		Log.i("Main activity", "Working 11");
+		//spinner.setAdapter(adapter);    
+		Log.i("Main activity", "Working 12");
 		
 		
 		
@@ -123,7 +133,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 					} catch (JSONException e) {
 						Log.e("JSON Parser", "Error parsing data [" + e.getMessage()+"] "+fileContent);
 						e.printStackTrace();
-					}
+					} 
 					
 				}
 			}
@@ -239,18 +249,14 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 			break;
 		case R.id.preferences:
 			Log.i("Main Activity", "Selected 'Preferences'");
-			//Spinner spinner = (Spinner) new Spinner(mContext);
-			//Spinner arrayForSpinner = new ArrayList<String>();
-			//arrayForSpinner = R.array.background_colors;
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, R.array.background_colors);
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-			spinner.setAdapter(adapter);
 			
 			launchDialogFragment(DialogType.PREFERENCES);
 			break;
 		case R.id.favorites:
 			Log.i("Main Activity", "Selected 'Favorites'");
+			Intent favoritesActivity = new Intent(getBaseContext(), FavoritesActivity.class);
+			//Intent detailActivity = new Intent(getBaseContext(), DetailsActivity.class);
+			startActivity(favoritesActivity);
 			
 			break;
 		}
@@ -291,6 +297,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 	}
 	public static class AlertDialogFragment extends DialogFragment {
 		public static DialogType type;
+		Context context;
 
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -298,14 +305,36 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			switch(type) {
 			case PREFERENCES: 
+				
 				builder.setView(inflater.inflate(R.layout.preferences_dialog, null))
+					.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+								@Override
+								public void onItemSelected(AdapterView<?> arg0,
+										View arg1, int position, long arg3) {
+									// TODO Auto-generated method stub
+									//final String typeSelected = arrayForTypeId.get(position);
+									Log.i("Main Activity", "Position selected: " + position);
+									
+								}
+
+								@Override
+								public void onNothingSelected(
+										AdapterView<?> arg0) {
+									// TODO Auto-generated method stub
+									
+								}
+								
+							})
 					.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-						
+
 						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							
+						public void onClick(DialogInterface arg0, int arg1) {
+							// TODO Auto-generated method stub
 							
 						}
+						
+						
 					})
 					.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 						

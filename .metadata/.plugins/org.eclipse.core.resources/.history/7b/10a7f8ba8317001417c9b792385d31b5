@@ -1,0 +1,42 @@
+package com.arianaantonio.spaceimageviewer;
+
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+
+public class FavoritesActivity extends Activity {
+
+	@SuppressWarnings("deprecation")
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.favorites_view);
+		
+		TextView favoritesView = (TextView) findViewById(R.id.favoritesTextView);
+		favoritesView.setText("Testing");
+		
+		FileInputStream fis;
+		final StringBuffer storedString = new StringBuffer();
+
+		try {
+		    fis = openFileInput("FavoritesFile.txt");
+		    DataInputStream dataIO = new DataInputStream(fis);
+		    String strLine = null;
+
+		    while ((strLine = dataIO.readLine()) != null) {
+		        storedString.append(strLine);
+		    }
+		    Log.i("Favorites Activity", "File content: " +strLine);
+		    dataIO.close();
+		    fis.close();
+		}
+		catch  (Exception e) {  
+		}
+	}
+
+}
