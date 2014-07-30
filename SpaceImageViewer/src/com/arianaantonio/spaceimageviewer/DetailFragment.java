@@ -108,7 +108,7 @@ public class DetailFragment extends Fragment {
 		hdButton = (Button) view.findViewById(R.id.button1);
 		imageView = (SmartImageView) view.findViewById(R.id.my_image);
 		ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
-		ratingBar.setRating(0);
+		//ratingBar.setRating(0);
 		
 		ratingBar.setOnTouchListener(new OnTouchListener() {
 			
@@ -120,15 +120,20 @@ public class DetailFragment extends Fragment {
 				
 				String title = titleView.getText().toString();
 				Log.i("Favorite", ratingValue + " " +title);
-				
+				if (ratingValue == "0.0") {
+					
+				} else {
 				BufferedWriter writer = null;
-				
+				 
 				try {
 					String filePath = context.getFilesDir().getPath().toString() + "/FavoritesFile.txt";
 					File file = new File(filePath);
 					System.out.println(file.getCanonicalPath());
+					//file.delete();
+					//writer = new BufferedWriter(new FileWriter(file));
 					writer = new BufferedWriter(new FileWriter(file, true));
 					String lineTitle = title+ "\n";
+					//writer.write("");
 		            writer.write(lineTitle);
 		            
 				} catch (IOException e) {
@@ -142,7 +147,7 @@ public class DetailFragment extends Fragment {
 				}
 
 	            
-				
+				}
 				
 				return false;
 			}

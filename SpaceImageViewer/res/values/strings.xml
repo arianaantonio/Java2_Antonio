@@ -30,6 +30,7 @@
     <color name="Pink">#E30EB1</color>
     <color name="Brown">#75350B</color>
     <string name="favoritesactivity">Favorites Activity</string>
+    <string name="textview_hint">Enter a new list title</string>
    
 
 </resources>

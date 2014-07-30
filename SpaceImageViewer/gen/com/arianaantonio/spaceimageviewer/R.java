@@ -39,26 +39,28 @@ public final class R {
         public static final int ic_launcher=0x7f020003;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0016;
+        public static final int action_settings=0x7f0a0018;
         public static final int button1=0x7f0a0009;
         public static final int camera=0x7f0a0004;
         public static final int cameraType=0x7f0a0008;
-        public static final int detailfragment=0x7f0a000f;
-        public static final int dialog_spinner=0x7f0a0012;
-        public static final int favorites=0x7f0a0014;
-        public static final int favoritesTextView=0x7f0a000e;
-        public static final int favoritesTitle=0x7f0a000d;
-        public static final int imageView1=0x7f0a0011;
+        public static final int detailfragment=0x7f0a0010;
+        public static final int dialogTextInput=0x7f0a0013;
+        public static final int favorites=0x7f0a0016;
+        public static final int favoritesTextView=0x7f0a000f;
+        public static final int favoritesTitle=0x7f0a000e;
+        public static final int imageView1=0x7f0a0012;
         public static final int linearLayout1=0x7f0a0005;
         public static final int linearLayout2=0x7f0a0007;
         public static final int linearLayout3=0x7f0a000a;
         public static final int listView1=0x7f0a0001;
-        public static final int main_fragment=0x7f0a0010;
-        public static final int my_image=0x7f0a000c;
-        public static final int preferences=0x7f0a0015;
+        public static final int listViewTitle=0x7f0a0000;
+        public static final int main_fragment=0x7f0a0011;
+        public static final int my_image=0x7f0a000d;
+        public static final int preferences=0x7f0a0017;
         public static final int ratingBar=0x7f0a000b;
-        public static final int search=0x7f0a0013;
-        public static final int textView1=0x7f0a0000;
+        public static final int search=0x7f0a0015;
+        public static final int search_input=0x7f0a0014;
+        public static final int textView1=0x7f0a000c;
         public static final int title=0x7f0a0002;
         public static final int user=0x7f0a0003;
         public static final int userName=0x7f0a0006;
@@ -93,6 +95,7 @@ public final class R {
         public static final int preferences=0x7f05000a;
         public static final int search=0x7f05000b;
         public static final int search_hint=0x7f05000d;
+        public static final int textview_hint=0x7f05000f;
         public static final int textview_text=0x7f050002;
         public static final int userString=0x7f050005;
     }

@@ -29,18 +29,20 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.EditText;
+import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arianaantonio.networkconnection.NetworkConnect;
@@ -54,36 +56,32 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 	FileManager mFile;
 	String mFileName = "ImageFile.txt";
 	public enum DialogType {SEARCH, PREFERENCES, FAVORITES};
-	//public final static Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-	
-	//public Spinner spinner;
+	SharedPreferences preferences;
+	static SharedPreferences.Editor edit;
+	static TextView titleView;
+	//TextView titleView = (TextView) findViewById(R.id.listViewTitle);
 
 	private static FileManager fileManager = FileManager.getInstance();
 	final MyHandler handler = new MyHandler(this);
-	ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
+	static ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		 
+		setContentView(R.layout.fragment_main);
 		mContext = this;
 		mFile = FileManager.getInstance();
-		Log.i("Main activity", "Working 8");
-				
-		//spinner = (Spinner) findViewById(R.id.spinner1);
-		//Spinner spinner;
-		Log.i("Main activity", "Working 9");
-		
-		//Spinner spinner = (Spinner) findViewById(R.id.dialog_spinner);
-		
-		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, R.array.background_colors);
-		Log.i("Main activity", "Working 10");
-		//adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		Log.i("Main activity", "Working 11");
-		//spinner.setAdapter(adapter);    
-		Log.i("Main activity", "Working 12");
-		
-		
+		preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+		edit = preferences.edit();
+		if (preferences.getString("title", "").toString().isEmpty()) {
+			edit.putString("title", "title");
+			edit.apply();
+		}
+		titleView = (TextView) findViewById(R.id.listViewTitle);
+		String newTitle = preferences.getString("title", "").toString();
+		Log.i("Main activity", "New string: " +newTitle);
+		titleView.setText(newTitle);
+		//titleView.setText(preferences.getString("title", "").toString());
 		
 		//checking network connection from JAR
 		NetworkConnect networkConnection = new NetworkConnect();
@@ -97,7 +95,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		final MyHandler handler = new MyHandler(this);
 		
 		getData(handler);
-		setContentView(R.layout.fragment_main);
+		
 	} 
 	
 	private static class MyHandler extends Handler {
@@ -276,7 +274,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		 detailActivity.putExtras(bundle);
 		 startActivityForResult(detailActivity, 0);
 		 Log.i("passToDetail", "working");
-	}
+	} 
 	//landscape mode: data of selected listview item sent back from the main fragment and passed to detail fragment
 	@Override
 	public void passBackClickedItem(HashMap<String, String> item) {
@@ -303,34 +301,23 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			LayoutInflater inflater = getActivity().getLayoutInflater();
+			
 			switch(type) {
 			case PREFERENCES: 
 				
 				builder.setView(inflater.inflate(R.layout.preferences_dialog, null))
-					.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-								@Override
-								public void onItemSelected(AdapterView<?> arg0,
-										View arg1, int position, long arg3) {
-									// TODO Auto-generated method stub
-									//final String typeSelected = arrayForTypeId.get(position);
-									Log.i("Main Activity", "Position selected: " + position);
-									
-								}
-
-								@Override
-								public void onNothingSelected(
-										AdapterView<?> arg0) {
-									// TODO Auto-generated method stub
-									
-								}
-								
-							})
 					.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
 						@Override
 						public void onClick(DialogInterface arg0, int arg1) {
-							// TODO Auto-generated method stub
+							Dialog dialog = (Dialog) arg0;
+							
+							EditText titleText = (EditText) dialog.findViewById(R.id.dialogTextInput);
+							String textString = titleText.getText().toString();
+							Log.i("Main Activity", "Change title: " +textString);
+							titleView.setText(textString);
+							edit.putString("title", textString);
+							edit.apply();
 							
 						}
 						
@@ -351,7 +338,17 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						
+					Dialog dialog1 = (Dialog) dialog;  
+					SearchView searchView = (SearchView) dialog1.findViewById(R.id.search_input);
+					String searchString = searchView.getQuery().toString();
+					Log.i("Main Activity", "Search input: " +searchString);
+					//HashMap<String, String> data1 = (HashMap<String, String>)myData.getSerializable("clicked data");
+					Log.i("Main Activity", "My data: " +myData);
+					String searchTitle = myData.get(0).get("title");
+					ArrayList<HashMap<String, String>> myData2 = new ArrayList<HashMap<String, String>>();
+							
+					
+					Log.i("Main Activity", "Searched title: " +searchTitle);
 						
 					}
 				})
@@ -360,7 +357,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						AlertDialogFragment.this.getDialog().cancel();
-						
+						 
 					}
 				});
 				
