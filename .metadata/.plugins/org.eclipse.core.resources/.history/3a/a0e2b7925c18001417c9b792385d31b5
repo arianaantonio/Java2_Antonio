@@ -120,9 +120,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
 				Log.i("Main Activity", "onTextChanged");
-				if (adapterMain !=null) {
 				MainActivity.this.adapterMain.getFilter().filter(s);
-				}
 				Log.i("Main Activity", "onTextChanged - after");
 			}
 			
@@ -276,13 +274,9 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		case R.id.search:
 			Log.i("Main Activity", "Selected 'Search'");
 			//launchDialogFragment(DialogType.SEARCH); 
-			if (searchView.isShown()) {
-				searchView.setVisibility(View.GONE);
-			} else {
-				searchView.setVisibility(View.VISIBLE);
-			} 
+			searchView.setVisibility(View.VISIBLE);
 			break;
-		case R.id.preferences: 
+		case R.id.preferences:
 			Log.i("Main Activity", "Selected 'Preferences'");
 			
 			launchDialogFragment(DialogType.PREFERENCES);

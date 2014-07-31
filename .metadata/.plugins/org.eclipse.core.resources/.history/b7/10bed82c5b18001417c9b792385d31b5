@@ -107,23 +107,25 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 
 			@Override
 			public void afterTextChanged(Editable arg0) {
+				//String text = searchView.getText().toString().toLowerCase();
+				//MainFragment.ParentListener.this.
+                //adapter.filter(text);
+				//MainActivity.this.adapterMain.getFilter().filter(cs);
 				
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
+				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
-				Log.i("Main Activity", "onTextChanged");
-				if (adapterMain !=null) {
+				String text = searchView.getText().toString().toLowerCase();
 				MainActivity.this.adapterMain.getFilter().filter(s);
-				}
-				Log.i("Main Activity", "onTextChanged - after");
 			}
 			
 		});
@@ -275,14 +277,9 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		switch (item.getItemId()) {
 		case R.id.search:
 			Log.i("Main Activity", "Selected 'Search'");
-			//launchDialogFragment(DialogType.SEARCH); 
-			if (searchView.isShown()) {
-				searchView.setVisibility(View.GONE);
-			} else {
-				searchView.setVisibility(View.VISIBLE);
-			} 
+			launchDialogFragment(DialogType.SEARCH);    
 			break;
-		case R.id.preferences: 
+		case R.id.preferences:
 			Log.i("Main Activity", "Selected 'Preferences'");
 			
 			launchDialogFragment(DialogType.PREFERENCES);
@@ -369,14 +366,13 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 						}
 					});
 				break;
-			//case SEARCH:
-				//builder.setO
-				//builder.setView(inflater.inflate(R.layout.search_dialog, null))
-				//.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			case SEARCH:
+				builder.setView(inflater.inflate(R.layout.search_dialog, null))
+				.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					
-					//@Override
-					//public void onClick(DialogInterface dialog, int which) {
-					//searchView.setVisibility(View.VISIBLE);
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+					searchView.setVisibility(View.VISIBLE);
 					//Dialog dialog1 = (Dialog) dialog;  
 					//SearchView searchView = (SearchView) dialog1.findViewById(R.id.search_input);
 					//String searchString = searchView.getQuery().toString();
@@ -389,18 +385,18 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 					
 					//Log.i("Main Activity", "Searched title: " +searchTitle);
 						
-					//}
-				//})
-				//.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					}
+				})
+				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 					
-					//@Override
-					//public void onClick(DialogInterface dialog, int which) {
-						//AlertDialogFragment.this.getDialog().cancel();
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						AlertDialogFragment.this.getDialog().cancel();
 						 
-					//}
-				//});
+					}
+				});
 				
-				//break;
+				break;
 	
 			}
 			return builder.create();

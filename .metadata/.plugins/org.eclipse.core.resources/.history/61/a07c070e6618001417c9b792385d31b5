@@ -276,13 +276,9 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		case R.id.search:
 			Log.i("Main Activity", "Selected 'Search'");
 			//launchDialogFragment(DialogType.SEARCH); 
-			if (searchView.isShown()) {
-				searchView.setVisibility(View.GONE);
-			} else {
-				searchView.setVisibility(View.VISIBLE);
-			} 
+			searchView.setVisibility(View.VISIBLE);
 			break;
-		case R.id.preferences: 
+		case R.id.preferences:
 			Log.i("Main Activity", "Selected 'Preferences'");
 			
 			launchDialogFragment(DialogType.PREFERENCES);
