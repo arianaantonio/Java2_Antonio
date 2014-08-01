@@ -10,6 +10,7 @@
  */
 package com.arianaantonio.spaceimageviewer;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import android.app.Activity;
@@ -28,20 +29,20 @@ import android.widget.SimpleAdapter;
 
 public class MainFragment extends Fragment {
 
-	private ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
+	private ArrayList<HashMap<String, ?>> myData = new ArrayList<HashMap<String, ?>>();
 	private ListView listView;
-	private Context context; 
+	private Context context;  
 	private ParentListener listener;
 	public interface ParentListener {
 		
-		void passBackClickedItem(HashMap<String, String> item);
+		void passBackClickedItem(HashMap<String, ?> item);
 		void passAdapter(SimpleAdapter adapter);
 	}
 	
 	public MainFragment() {
 		//context = getActivity();
 	}
-	@Override
+	@Override 
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		try {
@@ -63,9 +64,10 @@ public class MainFragment extends Fragment {
 		return view;
 	 }
 	//get api data passed from main activity and display to listview
-	public void displayData(ArrayList<HashMap<String, String>> data) {
-		myData = data; 
-		Log.i("My Data", myData.toString());   
+	public void displayData(ArrayList<HashMap<String, ?>> data) {
+		myData = data;     
+		Log.i("My Data", myData.toString()); 
+		URL url;
 		Log.i("Main Fragment", "working4"); 
 		SimpleAdapter adapter = new SimpleAdapter(context, myData, R.layout.advance_listview, 
 				new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
@@ -77,7 +79,7 @@ public class MainFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
-				HashMap<String, String> selectedListItem = myData.get(position);
+				HashMap<String, ?> selectedListItem = myData.get(position);
 				Log.i("Main Fragment Listview", "Selected" +selectedListItem);
 				listener.passBackClickedItem(selectedListItem);
 			}

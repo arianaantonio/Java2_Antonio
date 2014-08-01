@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="wrap_content" >
+    
+    <com.loopj.android.image.SmartImageView
+        android:id="@+id/my__listview_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_alignParentLeft="true" />
 
     <TextView
         android:id="@+id/title"
@@ -19,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
        />
 

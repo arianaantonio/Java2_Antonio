@@ -11,6 +11,10 @@
 package com.arianaantonio.spaceimageviewer;
 
 import java.lang.ref.WeakReference;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -69,7 +73,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 
 	private static FileManager fileManager = FileManager.getInstance();
 	final MyHandler handler = new MyHandler(this);
-	static ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
+	static ArrayList<HashMap<String, ?>> myData = new ArrayList<HashMap<String, ?>>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -163,6 +167,9 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 					} catch (JSONException e) {
 						Log.e("JSON Parser", "Error parsing data [" + e.getMessage()+"] "+fileContent);
 						e.printStackTrace();
+					} catch (MalformedURLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					} 
 					
 				}
@@ -179,8 +186,9 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 	}
 	/**grab data from txt file, add each object value to the display Hashmap
 	* set the values to the Simple Adapter to display on the listview
+	 * 
 	*/
-	public void displayData(JSONArray jsonArray) {
+	public void displayData(JSONArray jsonArray) throws MalformedURLException {
 		
 		Log.i("Main Activity", "working1");
 		for (int i = 0; i < jsonArray.length(); i++) {
@@ -193,11 +201,13 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 				String camera = jsonArray.getJSONObject(i).getString("imaging_cameras");
 				camera = camera.replace("[", "");
 				camera = camera.replace("]", "");
+				camera = camera.replace("\"", "");        
 				String hd = jsonArray.getJSONObject(i).getString("url_hd");
-				
+				//String url_thumb = jsonArray.getJSONObject(i).getString("url_thumb");
+				//URL thumb_url = new URL(url_thumb);
 				Log.i("Returned objects", title+ " " +user+" " +camera+ " " +url);
 				
-				HashMap<String, String> displayText = new HashMap<String, String>();
+				HashMap<String, Object> displayText = new HashMap<String, Object>();
 				//ArrayList<HashMap<String, String>> myData = new ArrayList<HashMap<String, String>>();
 				Log.i("Main Activity", "working 2.5");
 				displayText.put("title", title);
@@ -205,7 +215,9 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 				displayText.put("imaging_cameras", camera);
 				displayText.put("url", url);
 				displayText.put("hdImage", hd);
+				//displayText.put("imageThumb", thumb_url); 
 				Log.i("Main Activity", "working3");
+				
 				myData.add(displayText);
 				
 			} catch (JSONException e) {
@@ -302,7 +314,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		dialogFragment.show(getFragmentManager(), "search_dialog");
 	}
 	//portrait mode: data of selected listview item sent back from the main fragment and passed to detail fragment
-	public void passToDetail(HashMap<String, String> item) {
+	public void passToDetail(HashMap<String, ?> item) {
 		Log.i("Main Activty passed", "Selected" +item);
 		Intent detailActivity = new Intent(getBaseContext(), DetailsActivity.class);
 		
@@ -314,7 +326,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 	} 
 	//landscape mode: data of selected listview item sent back from the main fragment and passed to detail fragment
 	@Override
-	public void passBackClickedItem(HashMap<String, String> item) {
+	public void passBackClickedItem(HashMap<String, ?> item) {
 		
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("clicked data", item);
@@ -373,6 +385,8 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 				//builder.setO
 				//builder.setView(inflater.inflate(R.layout.search_dialog, null))
 				//.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			default:
+				break;
 					
 					//@Override
 					//public void onClick(DialogInterface dialog, int which) {

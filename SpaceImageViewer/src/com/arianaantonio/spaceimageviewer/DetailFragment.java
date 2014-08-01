@@ -46,10 +46,10 @@ public class DetailFragment extends Fragment {
 	private TextView userView;
 	private TextView cameraView;
 	private String hdUrl;
-	private String title;
+	private String title; 
 	HashMap<String, String> data;
 	private SmartImageView imageView;
-	View view;
+	View view;   
 	
 	@SuppressWarnings("unused")
 	private Context context; 
@@ -94,7 +94,7 @@ public class DetailFragment extends Fragment {
 		}
 		
 	} 
-	
+	   
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -108,7 +108,7 @@ public class DetailFragment extends Fragment {
 		hdButton = (Button) view.findViewById(R.id.button1);
 		imageView = (SmartImageView) view.findViewById(R.id.my_image);
 		ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
-		//ratingBar.setRating(0);
+		//ratingBar.setRating(0);  
 		
 		ratingBar.setOnTouchListener(new OnTouchListener() {
 			

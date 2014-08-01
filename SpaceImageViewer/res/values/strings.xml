@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Space Image Viewer</string>
+    <string name="app_name">Space Images</string>
     <string name="action_settings">Settings</string>
     <string name="textview_text">List of images of spiral galaxies</string>
     <string name="detail_view">Details:</string>
@@ -12,8 +12,8 @@
     <string name="userString">User:</string>
     <string name="cameraString">Camera:</string>
     <string name="HDbutton">View HD Image</string>
-    <string name="detailactivity">Details Activity</string>
-    <string name="favorite">Save As Favorite</string>
+    <string name="detailactivity">Image Details</string>
+    <string name="favorite">Save As Favorite:</string>
     <string name="preferences">Preferences</string>
     <string name="search">Search</string>
     <string name="favorites">Favorites:</string>
@@ -29,7 +29,7 @@
     <color name="Green">#30A307</color>
     <color name="Pink">#E30EB1</color>
     <color name="Brown">#75350B</color>
-    <string name="favoritesactivity">Favorites Activity</string>
+    <string name="favoritesactivity">Favorites</string>
     <string name="textview_hint">Enter a new list title</string>
    
 
