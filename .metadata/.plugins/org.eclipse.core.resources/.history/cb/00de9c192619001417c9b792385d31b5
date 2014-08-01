@@ -113,7 +113,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 			public void afterTextChanged(Editable arg0) {
 				
 			}
-  
+
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {

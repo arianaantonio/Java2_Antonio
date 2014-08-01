@@ -223,7 +223,7 @@ public class DetailFragment extends Fragment {
 		  }
 		  Log.i("Detail Fragment", "working 7");
 		
-	}  
+	}
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
