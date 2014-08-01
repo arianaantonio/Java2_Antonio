@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import android.app.Activity;
@@ -44,12 +46,12 @@ public class DetailFragment extends Fragment {
 	private TextView userView;
 	private TextView cameraView;
 	private String hdUrl;
-
+	private String title; 
 	HashMap<String, String> data;
 	private SmartImageView imageView;
 	View view;   
 	
-
+	@SuppressWarnings("unused")
 	private Context context; 
 	private ParentListener listener;
 	public interface ParentListener {
@@ -127,8 +129,10 @@ public class DetailFragment extends Fragment {
 					File file = new File(filePath);
 					System.out.println(file.getCanonicalPath());
 					//file.delete();
+					//writer = new BufferedWriter(new FileWriter(file));
 					writer = new BufferedWriter(new FileWriter(file, true));
 					String lineTitle = title+ "\n";
+					//writer.write("");
 		            writer.write(lineTitle);
 		            
 				} catch (IOException e) {

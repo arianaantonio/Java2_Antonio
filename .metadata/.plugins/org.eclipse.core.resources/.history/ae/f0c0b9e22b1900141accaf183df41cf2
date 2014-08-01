@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import android.app.Activity;
@@ -44,12 +46,12 @@ public class DetailFragment extends Fragment {
 	private TextView userView;
 	private TextView cameraView;
 	private String hdUrl;
-
+	private String title; 
 	HashMap<String, String> data;
 	private SmartImageView imageView;
 	View view;   
 	
-
+	@SuppressWarnings("unused")
 	private Context context; 
 	private ParentListener listener;
 	public interface ParentListener {
@@ -57,6 +59,7 @@ public class DetailFragment extends Fragment {
 	}
 	@Override
 	public void onAttach(Activity activity) {
+		// TODO Auto-generated method stub
 		super.onAttach(activity);
 		try {
 			listener = (ParentListener) activity;
@@ -121,14 +124,16 @@ public class DetailFragment extends Fragment {
 					
 				} else {
 				BufferedWriter writer = null;
-				 //saving title to file if favorite is selected
+				 
 				try {
 					String filePath = context.getFilesDir().getPath().toString() + "/FavoritesFile.txt";
 					File file = new File(filePath);
 					System.out.println(file.getCanonicalPath());
 					//file.delete();
+					//writer = new BufferedWriter(new FileWriter(file));
 					writer = new BufferedWriter(new FileWriter(file, true));
 					String lineTitle = title+ "\n";
+					//writer.write("");
 		            writer.write(lineTitle);
 		            
 				} catch (IOException e) {
@@ -159,7 +164,14 @@ public class DetailFragment extends Fragment {
 		 }
 		return view;
 }
-
+	/*
+	public void passRating() { 
+		Intent dataPassing = new Intent();
+		dataPassing.putExtra("title", title);
+		dataPassing.putExtra("rating", rating);
+		listener.passRatingInfo(dataPassing);
+		
+	}*/
 	//data is passed from detail activity and displayed to the detail fragment
 	public void displayDetails(Bundle bundle) {
 		 Log.i("Detail Fragment", "Bundle: " + bundle);

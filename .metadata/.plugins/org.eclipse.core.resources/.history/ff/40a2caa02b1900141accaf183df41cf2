@@ -81,8 +81,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		setContentView(R.layout.fragment_main);
 		mContext = this;
 		mFile = FileManager.getInstance(); 
-		
-		//getting and setting saved preferences for listvies title
+
 		preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 		edit = preferences.edit();
 		if (preferences.getString("title", "").toString().isEmpty()) {
@@ -107,8 +106,6 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		final MyHandler handler = new MyHandler(this);
 		
 		getData(handler);
-		
-		//creating searchview to filter listview items
 		searchView = (EditText) findViewById(R.id.search_editText);
 		searchView.addTextChangedListener(new TextWatcher(){
 
@@ -276,7 +273,7 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 			}
 		}
 	}
-	//inflate action bar
+	
 	@Override 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -285,8 +282,6 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	//get which action bar item selected and perform action based on selection
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -347,7 +342,6 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		}
 		
 	}
-	//create dialog fragment to change preferences
 	public static class AlertDialogFragment extends DialogFragment {
 		public static DialogType type;
 		Context context;
@@ -387,10 +381,41 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 						}
 					});
 				break;
-		
+			//case SEARCH:
+				//builder.setO
+				//builder.setView(inflater.inflate(R.layout.search_dialog, null))
+				//.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			default:
 				break;
 					
+					//@Override
+					//public void onClick(DialogInterface dialog, int which) {
+					//searchView.setVisibility(View.VISIBLE);
+					//Dialog dialog1 = (Dialog) dialog;  
+					//SearchView searchView = (SearchView) dialog1.findViewById(R.id.search_input);
+					//String searchString = searchView.getQuery().toString();
+					//Log.i("Main Activity", "Search input: " +searchString);
+					//HashMap<String, String> data1 = (HashMap<String, String>)myData.getSerializable("clicked data");
+					//Log.i("Main Activity", "My data: " +myData);
+					//String searchTitle = myData.get(0).get("title");
+					//ArrayList<HashMap<String, String>> myData2 = new ArrayList<HashMap<String, String>>();
+							
+					
+					//Log.i("Main Activity", "Searched title: " +searchTitle);
+						
+					//}
+				//})
+				//.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					
+					//@Override
+					//public void onClick(DialogInterface dialog, int which) {
+						//AlertDialogFragment.this.getDialog().cancel();
+						 
+					//}
+				//});
+				
+				//break;
+	
 			}
 			return builder.create();
 		}
@@ -400,10 +425,23 @@ public class MainActivity extends Activity implements MainFragment.ParentListene
 		}
 		
 	}
-	//accept adapter data passed from MainFragment to use in search
 	@Override
 	public void passAdapter(SimpleAdapter adapter) {
 		adapterMain = adapter;
 		
 	}
+
+	/*
+	@Override
+	public void passRatingInfo(Intent dataPassing) {
+		Log.i("Main Activity", "inside passRatingInfo");
+		
+		int requestCode = 0;
+		int resultCode = RESULT_OK;
+		Log.i("Main Activity", "inside passRatingInfo");
+		if (dataPassing != null) {
+			onActivityResult(requestCode, resultCode, dataPassing); 
+		}
+		
+	}*/
 }

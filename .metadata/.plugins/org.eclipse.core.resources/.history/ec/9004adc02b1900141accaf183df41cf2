@@ -71,11 +71,8 @@ public class MainFragment extends Fragment {
 		Log.i("Main Fragment", "working4"); 
 		SimpleAdapter adapter = new SimpleAdapter(context, myData, R.layout.advance_listview, 
 				new String[] {"title", "user", "imaging_cameras"}, new int[] {R.id.title, R.id.user, R.id.camera});
-		Log.i("Main Fragment", "working5");
-		
-		//passing adapter back to MainActivity to use in search
+		Log.i("Main Fragment", "working5"); 
 		listener.passAdapter(adapter);
-		
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -84,8 +81,6 @@ public class MainFragment extends Fragment {
 					long arg3) {
 				HashMap<String, ?> selectedListItem = myData.get(position);
 				Log.i("Main Fragment Listview", "Selected" +selectedListItem);
-				
-				//passing back selected item to MainActivity
 				listener.passBackClickedItem(selectedListItem);
 			}
 			
